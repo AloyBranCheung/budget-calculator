@@ -8,7 +8,12 @@ export default function CurrBudgetDisplay() {
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
-      <TitleText title="Current Amount: $value" />
+      <div>
+        <TitleText title="Current Amount:" />
+        <div className="flex items-center justify-center">
+          <TitleText className="text-8xl" title="$69" />
+        </div>
+      </div>
       <div className="flex gap-2 flex-col sm:flex-row sm:items-center">
         <TitleText title="Update amount?:" />
         <div className="flex gap-2">
