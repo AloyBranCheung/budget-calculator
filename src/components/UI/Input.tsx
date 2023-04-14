@@ -19,7 +19,7 @@ export default function Input({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="border-2 border-gray-300 rounded-md p-2"
+      className="border-2 border-gray-300 rounded-md p-1"
     />
   );
 }
