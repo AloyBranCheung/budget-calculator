@@ -6,7 +6,7 @@ export default function Spendables() {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <SectionTitle bold title="Spendables" />
+        <SectionTitle bold title="Current Spendables" />
         <p>
           The following is calculated by the 50/30/20 rule where 50% of your
           income is for necessities (e.g. rent, groceries), 30% of your income

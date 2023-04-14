@@ -9,14 +9,16 @@ export default function CurrBudgetDisplay() {
     <div>
       <SectionTitle bold title="Current Budget" />
       <TitleText title="Current Amount: $value" />
-      <div className="flex gap-5 items-center">
-        <TitleText title="Update amount?: " />
-        <Input
-          value="test"
-          onChange={() => console.log("changed")}
-          type="text"
-        />
-        <Button onClick={() => console.log("clicked")} label="Update" />
+      <div className="flex gap-2 flex-col sm:flex-row sm:items-center">
+        <TitleText title="Update amount?:" />
+        <div className="flex gap-2">
+          <Input
+            value={69}
+            onChange={() => console.log("changed")}
+            type="number"
+          />
+          <Button onClick={() => console.log("clicked")} label="Update" />
+        </div>
       </div>
     </div>
   );
