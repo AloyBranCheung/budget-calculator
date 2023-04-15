@@ -10,7 +10,7 @@ interface ExpendItemProps {
 
 export default function ExpendItem({ item }: ExpendItemProps) {
   return (
-    <div className="border-2 border-solid rounded-2xl border-black p-5 w-80">
+    <div className="border-2 border-solid rounded-2xl border-black p-5 ">
       <TitleText className="text-4xl" title={`$ ${item.value.toFixed(2)}`} />
       <TitleText title={`Description: ${item.description}`} />
       <div className="flex gap-5">

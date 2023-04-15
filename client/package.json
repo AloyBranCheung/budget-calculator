@@ -9,12 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.0.1",
     "dayjs": "^1.11.7",
     "firebase": "^9.19.1",
+    "framer-motion": "^10.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
-    "tw-elements": "^1.0.0-beta2"
+    "react-toastify": "^9.1.2",
+    "tw-elements": "^1.0.0-beta2",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
