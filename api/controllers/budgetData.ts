@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
+import calculateCurrSpendables from "../utils/calculateSpendables";
 
 export const getBudgetData = async (
   req: Request,
@@ -28,6 +29,30 @@ export const getBudgetData = async (
   }
 };
 
-export const updateBudgetData = (req: Request, res: Response) => {
-  console.log("create route reached");
+export const updateBudgetData = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { totalStartingAmount } = req.body;
+  const decodedToken = req.decodedIdToken;
+  try {
+    if (decodedToken && decodedToken.uid) {
+      const update = {
+        current: {
+          ...calculateCurrSpendables(totalStartingAmount),
+        },
+      };
+      await BudgetDataModel.findOneAndUpdate(
+        { firebaseUserUid: decodedToken.uid },
+        update,
+        { new: true }
+      );
+      res.status(200).send("Ok");
+    } else {
+      res.status(500).send("Could not find data for user.");
+    }
+  } catch (error) {
+    next(error);
+  }
 };

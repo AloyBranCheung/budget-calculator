@@ -9,6 +9,7 @@ interface InputProps {
   isError?: boolean;
   errorMessage?: string;
   step?: string;
+  min?: number;
 }
 
 export default function Input({
@@ -20,6 +21,7 @@ export default function Input({
   isError,
   errorMessage,
   step,
+  min,
 }: InputProps) {
   return (
     <div>
@@ -30,6 +32,7 @@ export default function Input({
         placeholder={placeholder}
         className="border-2 border-gray-300 rounded-md p-1"
         step={step}
+        min={min}
       />
       {handleError && isError && <p className="text-red-500">{errorMessage}</p>}
     </div>

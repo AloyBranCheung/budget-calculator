@@ -9,6 +9,7 @@ interface FormInputProps<FV extends FieldValues> {
   inputPlaceholder: string;
   isError: boolean;
   errorMessage: string;
+  min?: number;
 }
 
 export default function FormInput<FV extends FieldValues>({
@@ -18,6 +19,7 @@ export default function FormInput<FV extends FieldValues>({
   inputPlaceholder,
   isError,
   errorMessage,
+  min,
 }: FormInputProps<FV>) {
   return (
     <Controller
@@ -32,6 +34,7 @@ export default function FormInput<FV extends FieldValues>({
           handleError
           isError={isError}
           errorMessage={errorMessage}
+          min={min}
         />
       )}
     />

@@ -7,3 +7,4 @@ import BudgetDataSchema from "../schemas/budgetDataSchema";
 const BudgetDataModel = mongoose.model("BudgetData", BudgetDataSchema);
 
 export default BudgetDataModel;
+export type BudgetDataDocumentType = typeof BudgetDataModel;
