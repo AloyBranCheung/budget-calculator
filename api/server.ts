@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
+import auth from "./utils/firebaseAdminSDK";
 import express from "express";
+import connectMongoose from "./utils/connectMongoose";
 // routers
 import authenticatedRoute from "./routes/authenticatedRoute";
 // middlewares
@@ -19,5 +21,9 @@ app.get("/health-check", (req, res) => {
 app.use(errorMiddleware);
 
 app.listen(port, () => {
+  connectMongoose();
+  if (auth) {
+    console.log("Firebase auth is initialized");
+  }
   console.log(`Server is running on port ${port}`);
 });
