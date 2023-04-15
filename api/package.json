@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "build-docker-image": "docker build -t budget-api .",
+    "run-docker-image": "docker run -p 3001:3001 --env-file ./.env --rm budget-api"
   },
   "dependencies": {
     "@types/cors": "^2.8.13",
