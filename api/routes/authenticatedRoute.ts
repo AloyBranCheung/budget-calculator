@@ -1,12 +1,12 @@
 import express from "express";
 import withAuth from "../middleware/withAuth";
+// controllers
+import { getData } from "../controllers/data";
 
 const router = express.Router();
 
 router.use(withAuth);
 
-router.get("/testAuth", (req, res) => {
-  res.send("You are authenticated");
-});
+router.get("/data", getData);
 
 export default router;

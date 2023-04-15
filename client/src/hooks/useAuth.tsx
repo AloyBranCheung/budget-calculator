@@ -10,7 +10,7 @@ import toastMessage, { ToastMessageType } from "../utils/toastMessages";
 
 export default function useAuth() {
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User>();
 

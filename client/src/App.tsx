@@ -9,20 +9,29 @@ import { ToastContainer } from "react-toastify";
 import useAuth from "./hooks/useAuth";
 
 function App() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return <Login />;
+  }
 
   return (
     <div className="font-nerd pt-5 pb-5">
-      {isLoggedIn ? (
-        <GutterContainer>
-          <div className="flex flex-col gap-5">
-            <Navbar />
-            <CalculatorContainer />
-          </div>
-        </GutterContainer>
-      ) : (
-        <Login />
-      )}
+      <GutterContainer>
+        <div className="flex flex-col gap-5">
+          <Navbar />
+          <CalculatorContainer />
+        </div>
+      </GutterContainer>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PageTitle from "../UI/typography/PageTitle";
-import Input from "../UI/Input";
+import { ToastContainer } from "react-toastify";
 // react-hook-form
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ export default function Login() {
     resolver: zodResolver(loginValidationSchema),
     defaultValues,
   });
-  const { login, user } = useAuth();
+  const { login, isLoading } = useAuth();
 
   const submitData = (data: z.infer<typeof loginValidationSchema>) => {
     login(data.email, data.password); // this is a function that will set the user to be logged in
@@ -59,9 +59,27 @@ export default function Login() {
               errors.password?.message ? errors.password?.message : ""
             }
           />
-          <Button type="submit" label="Login" />
+          {isLoading ? (
+            <div className="flex items-center justify-center w-full">
+              Loading...
+            </div>
+          ) : (
+            <Button type="submit" label="Login" />
+          )}
         </form>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

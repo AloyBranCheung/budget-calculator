@@ -32,8 +32,6 @@ const toastMessage = (messageType: ToastMessageType, message: string) => {
       });
       break;
     default:
-      console.log("default");
-
       toast.warn("Hmm, something's not right :|", {
         position: "top-right",
         autoClose: 5000,
