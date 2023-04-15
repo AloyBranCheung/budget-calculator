@@ -4,11 +4,12 @@ import auth from "../utils/firebaseAdminSDK";
 const withAuth = async (req: Request, res: Response, next: NextFunction) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(" ")[1];
+
     try {
       const decodedToken = await auth.verifyIdToken(token);
       // TODO: call next
       console.log("decodedToken", decodedToken);
-      res.status(200).send("Yup");
+      next();
     } catch (error) {
       next(error);
     }
