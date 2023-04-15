@@ -1,0 +1,13 @@
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/.env
+  api:
+    build: ./api
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./api/.env

@@ -28,7 +28,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.needs.remaining} remaining`}
+              title={`$${budgetData?.current.needs.remaining.toFixed(
+                2
+              )} remaining`}
             />
           )}
         </div>
@@ -38,7 +40,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.wants.remaining} remaining`}
+              title={`$${budgetData?.current.wants.remaining.toFixed(
+                2
+              )} remaining`}
             />
           )}
         </div>
@@ -48,7 +52,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.savings.remaining} remaining`}
+              title={`$${budgetData?.current.savings.remaining.toFixed(
+                2
+              )} remaining`}
             />
           )}
         </div>
