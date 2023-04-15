@@ -28,7 +28,11 @@ export default function CurrBudgetDisplay({
       <div>
         <div className="flex gap-2">
           <TitleText title="Starting Amount:" />
-          <TitleText title={`$${budgetData?.current.budget.total}`} />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TitleText title={`$${budgetData?.current.budget.total}`} />
+          )}
         </div>
         <TitleText title="Remaining Amount:" />
         <div className="flex items-center justify-center">

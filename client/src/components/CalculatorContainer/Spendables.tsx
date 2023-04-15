@@ -27,7 +27,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <TitleText title={`$${budgetData?.current.needs}`} />
+            <TitleText
+              title={`$${budgetData?.current.needs.remaining} remaining`}
+            />
           )}
         </div>
         <div className="flex gap-5 justify-between">
@@ -35,7 +37,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <TitleText title={`$${budgetData?.current.wants}`} />
+            <TitleText
+              title={`$${budgetData?.current.wants.remaining} remaining`}
+            />
           )}
         </div>
         <div className="flex gap-5 justify-between">
@@ -43,7 +47,9 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <TitleText title={`$${budgetData?.current.savings}`} />
+            <TitleText
+              title={`$${budgetData?.current.savings.remaining} remaining`}
+            />
           )}
         </div>
       </div>
