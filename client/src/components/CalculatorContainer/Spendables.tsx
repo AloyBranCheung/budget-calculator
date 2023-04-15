@@ -1,8 +1,15 @@
 import React from "react";
 import SectionTitle from "../UI/typography/SectionTitle";
 import TitleText from "../UI/typography/TitleText";
+// types
+import { BudgetDataAPIResponse } from "../../@types/budgetData";
 
-export default function Spendables() {
+interface SpendablesProps {
+  isLoading: boolean;
+  budgetData: BudgetDataAPIResponse | undefined;
+}
+
+export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -17,15 +24,27 @@ export default function Spendables() {
       <div className="flex flex-col gap-5 w-max">
         <div className="flex gap-5 justify-between">
           <TitleText title="Needs (50%):" />
-          <TitleText title="$value remaining" />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TitleText title={`$${budgetData?.current.needs}`} />
+          )}
         </div>
         <div className="flex gap-5 justify-between">
           <TitleText title="Wants (30%):" />
-          <TitleText title="$value remaining" />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TitleText title={`$${budgetData?.current.wants}`} />
+          )}
         </div>
         <div className="flex gap-5 justify-between">
           <TitleText title="Savings (20%):" />
-          <TitleText title="$value remaining" />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TitleText title={`$${budgetData?.current.savings}`} />
+          )}
         </div>
       </div>
     </div>

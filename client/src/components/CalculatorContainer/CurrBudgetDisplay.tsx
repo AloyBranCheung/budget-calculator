@@ -1,28 +1,57 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import SectionTitle from "../UI/typography/SectionTitle";
 import TitleText from "../UI/typography/TitleText";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+// types
+import { BudgetDataAPIResponse } from "../../@types/budgetData";
 
-export default function CurrBudgetDisplay() {
+interface CurrBudgetDisplayProps {
+  isLoading: boolean;
+  budgetData: BudgetDataAPIResponse | undefined;
+}
+
+export default function CurrBudgetDisplay({
+  isLoading,
+  budgetData,
+}: CurrBudgetDisplayProps) {
+  const [updateAmount, setUpdateAmount] = useState<number>(0);
+
+  const handleChangeAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    setUpdateAmount(Number(e.target.value));
+  };
+
+  const handleClickUpdate = () => console.log("clicked");
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
       <div>
-        <TitleText title="Current Amount:" />
+        <div className="flex gap-2">
+          <TitleText title="Starting Amount:" />
+          <TitleText title={`$${budgetData?.current.budget.total}`} />
+        </div>
+        <TitleText title="Remaining Amount:" />
         <div className="flex items-center justify-center">
-          <TitleText className="!text-8xl my-5" title="$69" />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TitleText
+              className="!text-8xl my-5"
+              title={`$${budgetData?.current.budget.remaining}`}
+            />
+          )}
         </div>
       </div>
       <div className="flex gap-2 flex-col sm:flex-row sm:items-center">
-        <TitleText title="Update amount?:" />
+        <TitleText title="Update Starting Amount?:" />
         <div className="flex gap-2">
           <Input
-            value={69}
-            onChange={() => console.log("changed")}
+            value={updateAmount}
+            onChange={handleChangeAmount}
             type="number"
+            step="0.01"
           />
-          <Button onClick={() => console.log("clicked")} label="Update" />
+          <Button onClick={handleClickUpdate} label="Update" />
         </div>
       </div>
     </div>

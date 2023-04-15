@@ -19,10 +19,22 @@ const BudgetDataSchema = new mongoose.Schema(
   {
     firebaseUserUid: { type: String, unique: true },
     current: {
-      budget: { type: Number, default: 0 },
-      needs: { type: Number, default: 0 },
-      Wants: { type: Number, default: 0 },
-      Savings: { type: Number, default: 0 },
+      budget: {
+        total: { type: Number, default: 0 },
+        remaining: { type: Number, default: 0 },
+      },
+      needs: {
+        total: { type: Number, default: 0 },
+        remaining: { type: Number, default: 0 },
+      },
+      wants: {
+        total: { type: Number, default: 0 },
+        remaining: { type: Number, default: 0 },
+      },
+      savings: {
+        total: { type: Number, default: 0 },
+        remaining: { type: Number, default: 0 },
+      },
     },
     categories: {
       necessities: [CategorySchema],
