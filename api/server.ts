@@ -1,15 +1,17 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+// routers
+import authenticatedRoute from "./routes/authenticatedRoute";
 // middlewares
 import errorMiddleware from "./middleware/errorHandler";
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use("/api/");
+app.use("/api", authenticatedRoute);
 
-app.get("/api/health-check", (req, res) => {
+app.get("/health-check", (req, res) => {
   res.send("We good.");
 });
 

@@ -8,3 +8,5 @@ router.use(withAuth);
 router.get("/testAuth", (req, res) => {
   res.send("You are authenticated");
 });
+
+export default router;
