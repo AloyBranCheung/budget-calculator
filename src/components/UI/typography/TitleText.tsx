@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TitleTextProps {
-  title: string;
+  title: string | number;
   className?: string;
 }
 
