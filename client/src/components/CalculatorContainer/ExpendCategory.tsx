@@ -18,10 +18,10 @@ export default function ExpendCategory({ title, items }: ExpendCategoryProps) {
   return (
     <div className="flex flex-col gap-2">
       <TitleText bold title={title} />
-      <div>
+      {/* <div>
         <KeyValueText label="Total:" value="$Value" />
         <KeyValueText label="Remaining:" value="$Value" />
-      </div>
+      </div> */}
       <div className="flex gap-2">{expenditureItems}</div>
     </div>
   );
