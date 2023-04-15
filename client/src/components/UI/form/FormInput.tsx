@@ -10,9 +10,13 @@ interface FormInputProps<FV extends FieldValues> {
   isError: boolean;
   errorMessage: string;
   min?: number;
+  className?: string;
+  label?: boolean;
+  labelText?: string;
 }
 
 export default function FormInput<FV extends FieldValues>({
+  className,
   control,
   name,
   inputType,
@@ -20,22 +24,28 @@ export default function FormInput<FV extends FieldValues>({
   isError,
   errorMessage,
   min,
+  label,
+  labelText,
 }: FormInputProps<FV>) {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, value } }) => (
-        <Input
-          placeholder={inputPlaceholder}
-          onChange={onChange}
-          value={value}
-          type={inputType}
-          handleError
-          isError={isError}
-          errorMessage={errorMessage}
-          min={min}
-        />
+        <div>
+          {label && <div>{labelText}</div>}
+          <Input
+            className={className}
+            placeholder={inputPlaceholder}
+            onChange={onChange}
+            value={value}
+            type={inputType}
+            handleError
+            isError={isError}
+            errorMessage={errorMessage}
+            min={min}
+          />
+        </div>
       )}
     />
   );
