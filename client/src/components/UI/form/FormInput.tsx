@@ -1,5 +1,11 @@
 import React from "react";
-import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import {
+  Controller,
+  Control,
+  FieldValues,
+  Path,
+  RegisterOptions,
+} from "react-hook-form";
 import Input from "../Input";
 
 interface FormInputProps<FV extends FieldValues> {
@@ -13,6 +19,12 @@ interface FormInputProps<FV extends FieldValues> {
   className?: string;
   label?: boolean;
   labelText?: string;
+  rules?:
+    | Omit<
+        RegisterOptions<FV, Path<FV>>,
+        "valueAsDate" | "setValueAs" | "disabled"
+      >
+    | undefined;
 }
 
 export default function FormInput<FV extends FieldValues>({
@@ -26,9 +38,11 @@ export default function FormInput<FV extends FieldValues>({
   min,
   label,
   labelText,
+  rules,
 }: FormInputProps<FV>) {
   return (
     <Controller
+      rules={rules}
       control={control}
       name={name}
       render={({ field: { onChange, value } }) => (

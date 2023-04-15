@@ -8,25 +8,29 @@ import Button from "../UI/Button";
 // util/types
 import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 import { z } from "zod";
+import TitleText from "../UI/typography/TitleText";
 
 const defaultValues: z.infer<typeof addExpenditureValidationSchema> = {
-  category: BudgetCategory.Needs,
+  category: "",
   amount: 0,
   description: "",
   date: new Date(),
-  tags: [],
 };
 
 export default function AddExpenditure() {
   const {
     register,
     handleSubmit,
+    reset,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(addExpenditureValidationSchema),
     defaultValues,
   });
+
+  const watchCategory = watch("category");
 
   const handleSubmitForm = (
     data: z.infer<typeof addExpenditureValidationSchema>
@@ -47,40 +51,51 @@ export default function AddExpenditure() {
           <option value={BudgetCategory.Wants}>Wants</option>
           <option value={BudgetCategory.Savings}>Savings</option>
         </select>
-        <div className="flex flex-col gap-5">
-          <FormInput
-            className="w-full"
-            control={control}
-            name="description"
-            inputType="text"
-            inputPlaceholder="Description"
-            isError={"description" in errors}
-            errorMessage={
-              errors.description?.message ? errors.description.message : ""
-            }
-          />
-          <FormInput
-            label
-            labelText="Amount"
-            control={control}
-            name="amount"
-            inputType="number"
-            inputPlaceholder="Amount"
-            isError={"amount" in errors}
-            errorMessage={errors.amount?.message ? errors.amount.message : ""}
-          />
-          <select className="w-min" {...register("tags")}>
-            <option value="">Select Tags</option>
-            <option value="addTag">Add Custom Tag</option>
-            {
-              // TODO: multi-select and addTag then render tag field
-            }
-          </select>
-          <div className="flex gap-5">
-            <Button type="button" label="Clear" className="w-min" />
-            <Button type="submit" label="Add" className="w-min" />
+
+        {!(watchCategory === "") && (
+          <div className="flex flex-col gap-5">
+            <div>
+              <p>Date</p>
+              <input type="date" {...register("date", { valueAsDate: true })} />
+              {"date" in errors && errors.date?.message && (
+                <p className="text-red-500">{errors.date.message}</p>
+              )}
+            </div>
+
+            <FormInput
+              className="w-full"
+              control={control}
+              name="description"
+              inputType="text"
+              inputPlaceholder="Description"
+              isError={"description" in errors}
+              errorMessage={
+                errors.description?.message ? errors.description.message : ""
+              }
+            />
+            <div>
+              <p>Amount</p>
+              <input
+                type="number"
+                className={`border-2 border-gray-300 rounded-md p-1 w-min`}
+                {...register("amount", { valueAsNumber: true })}
+              />
+              {"amount" in errors && errors.amount?.message && (
+                <p className="text-red-500">{errors.amount.message}</p>
+              )}
+            </div>
+
+            <div className="flex gap-5">
+              <Button
+                type="button"
+                label="Cancel"
+                className="w-min"
+                onClick={() => reset()}
+              />
+              <Button type="submit" label="Add" className="w-min" />
+            </div>
           </div>
-        </div>
+        )}
       </form>
     </div>
   );
