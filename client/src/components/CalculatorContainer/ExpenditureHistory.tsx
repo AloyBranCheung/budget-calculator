@@ -11,6 +11,7 @@ const DUMMY_ITEMS: ExpenditureItem[] = [
     description: "food at gyugyuya",
     categories: [
       {
+        id: 0,
         color: "white",
         tagCategory: "Enum",
         backgroundColor: "red",
@@ -24,6 +25,7 @@ const DUMMY_ITEMS: ExpenditureItem[] = [
     description: "food at gyugyuya",
     categories: [
       {
+        id: 1,
         color: "white",
         tagCategory: "Enum",
         backgroundColor: "red",
