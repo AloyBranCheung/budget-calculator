@@ -1,12 +1,13 @@
 import express from "express";
 import withAuth from "../middleware/withAuth";
 // controllers
-import { getData } from "../controllers/data";
+import { getBudgetData, updateBudgetData } from "../controllers/budgetData";
 
 const router = express.Router();
 
 router.use(withAuth);
 
-router.get("/data", getData);
+router.get("/data", getBudgetData);
+router.put("/data", updateBudgetData);
 
 export default router;

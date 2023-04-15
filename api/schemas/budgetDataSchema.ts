@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const CategorySchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
-  value: Number,
-  date: Date,
-  description: String,
+  value: { type: Number, default: 0 },
+  date: { type: Date, default: Date.now },
+  description: { type: String, default: "" },
   categories: [
     {
       id: mongoose.Schema.Types.ObjectId,
@@ -17,11 +17,12 @@ const CategorySchema = new mongoose.Schema({
 
 const BudgetDataSchema = new mongoose.Schema(
   {
+    firebaseUserUid: { type: String, unique: true },
     current: {
-      budget: Number,
-      needs: Number,
-      Wants: Number,
-      Savings: Number,
+      budget: { type: Number, default: 0 },
+      needs: { type: Number, default: 0 },
+      Wants: { type: Number, default: 0 },
+      Savings: { type: Number, default: 0 },
     },
     categories: {
       necessities: [CategorySchema],
@@ -31,6 +32,7 @@ const BudgetDataSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: "budgetDataPerUser",
   }
 );
 
