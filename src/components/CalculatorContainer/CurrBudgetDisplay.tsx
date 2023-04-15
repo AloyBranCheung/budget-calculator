@@ -11,7 +11,7 @@ export default function CurrBudgetDisplay() {
       <div>
         <TitleText title="Current Amount:" />
         <div className="flex items-center justify-center">
-          <TitleText className="text-8xl my-5" title="$69" />
+          <TitleText className="text-7xl my-5" title="$69" />
         </div>
       </div>
       <div className="flex gap-2 flex-col sm:flex-row sm:items-center">
