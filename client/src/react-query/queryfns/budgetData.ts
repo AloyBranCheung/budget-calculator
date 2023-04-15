@@ -1,5 +1,7 @@
 import backendServer from "../../utils/backendServer";
 import { BudgetDataAPIResponse } from "../../@types/budgetData";
+import { z } from "zod";
+import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 
 const getBudgetData = async () => {
   const response = await backendServer.get<BudgetDataAPIResponse>("/data");
@@ -14,5 +16,15 @@ export const updateBudgetData = async (totalStartingAmount: number) => {
     totalStartingAmount,
   });
 
+  return response.data;
+};
+
+export const updateBudgetCategories = async (
+  budgetObj: z.infer<typeof addExpenditureValidationSchema>
+) => {
+  const response = await backendServer.put<BudgetDataAPIResponse>(
+    "/data/categories",
+    budgetObj
+  );
   return response.data;
 };

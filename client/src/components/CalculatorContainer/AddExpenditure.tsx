@@ -5,10 +5,10 @@ import FormInput from "../UI/form/FormInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Button from "../UI/Button";
-// util/types
 import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 import { z } from "zod";
 import TitleText from "../UI/typography/TitleText";
+import useMutationUpdateBudgetCategories from "../../react-query/queryHooks/useMutationUpdateBudgetCategories";
 
 const defaultValues: z.infer<typeof addExpenditureValidationSchema> = {
   category: "",
@@ -29,13 +29,14 @@ export default function AddExpenditure() {
     resolver: zodResolver(addExpenditureValidationSchema),
     defaultValues,
   });
+  const { mutate } = useMutationUpdateBudgetCategories();
 
   const watchCategory = watch("category");
 
   const handleSubmitForm = (
     data: z.infer<typeof addExpenditureValidationSchema>
   ) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (
