@@ -7,8 +7,12 @@ import AddExpenditure from "./AddExpenditure";
 import useBudgetData from "../../react-query/queries/useBudgetData";
 
 export default function Calculator() {
-  const { data } = useBudgetData();
-  console.log(data);
+  const { data, isLoading } = useBudgetData();
+  if (!isLoading) {
+    console.log(data);
+  } else {
+    console.log("loading");
+  }
 
   return (
     <div className="flex flex-col gap-5">

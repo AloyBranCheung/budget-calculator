@@ -1,4 +1,5 @@
 export interface Tag {
+  id: string;
   color: string;
   tagCategory: string;
   backgroundColor: string;

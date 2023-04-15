@@ -6,11 +6,12 @@ const withAuth = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization.split(" ")[1];
 
     try {
-      const decodedToken = await auth.verifyIdToken(token);
-      // TODO: call next
-      console.log("decodedToken", decodedToken);
+      await auth.verifyIdToken(token);
       next();
     } catch (error) {
+      if (error instanceof Error) {
+        error.message = "Unauthorized: Invalid token";
+      }
       next(error);
     }
   } else {
