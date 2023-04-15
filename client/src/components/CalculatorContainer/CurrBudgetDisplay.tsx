@@ -3,6 +3,8 @@ import SectionTitle from "../UI/typography/SectionTitle";
 import TitleText from "../UI/typography/TitleText";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+// hooks
+import useMutationUpdateTotalStartAmount from "../../react-query/queryHooks/useMutationUpdateTotalStartAmount";
 // types
 import { BudgetDataAPIResponse } from "../../@types/budgetData";
 
@@ -16,12 +18,13 @@ export default function CurrBudgetDisplay({
   budgetData,
 }: CurrBudgetDisplayProps) {
   const [updateAmount, setUpdateAmount] = useState<number>(0);
+  const { mutate } = useMutationUpdateTotalStartAmount();
 
   const handleChangeAmount = (e: ChangeEvent<HTMLInputElement>) => {
     setUpdateAmount(Number(e.target.value));
   };
 
-  const handleClickUpdate = () => console.log("clicked");
+  const handleClickUpdate = () => mutate(updateAmount);
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
