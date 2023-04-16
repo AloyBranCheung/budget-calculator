@@ -31,8 +31,6 @@ const recalculateTotal = async (
         currDocument.current.savings.remaining -= category.amount;
       });
 
-      console.log("currdoc", currDocument);
-
       await currDocument?.save();
 
       res.status(200).send("Ok");
