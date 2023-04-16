@@ -14,6 +14,7 @@ export interface CategoryItems {
 }
 
 export enum BudgetCategory {
+  Budget = "budget",
   Needs = "needs",
   Wants = "wants",
   Savings = "savings",
