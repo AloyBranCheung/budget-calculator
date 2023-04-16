@@ -10,28 +10,28 @@ export const updateBudgetCategories = async (
   const addExpenditureBody: AddExpenditureRequest = req.body;
   const { firebaseUid } = req;
   try {
-    console.log(firebaseUid, addExpenditureBody);
-    const test = await BudgetDataModel.findOneAndUpdate(
-      { firebaseUserUid: firebaseUid },
+    console.log(addExpenditureBody.category);
+    const newModel = await BudgetDataModel.findOneAndUpdate(
       {
-        categories: {
-          $push: {
-            [addExpenditureBody.category]: {
-              amount: addExpenditureBody.amount,
-              date: addExpenditureBody.date,
-              description: addExpenditureBody.description,
-            },
+        firebaseUserUid: firebaseUid,
+      },
+      {
+        $push: {
+          [`categories.${addExpenditureBody.category}`]: {
+            amount: addExpenditureBody.amount,
+            date: addExpenditureBody.date,
+            description: addExpenditureBody.description,
           },
         },
       },
       { new: true }
     );
-    if (test) {
-      console.log(test);
+    if (newModel) {
+      console.log("newmodel", newModel);
       // TODO: next() to update calculations middleware
       res.status(200).send("OK");
     } else {
-      res.status(500).send("Could not find data for user.");
+      res.status(500).send("Error updating budget categories");
     }
   } catch (error) {
     next(error);
