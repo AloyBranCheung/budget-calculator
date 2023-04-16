@@ -4,6 +4,7 @@ import TitleText from "../UI/typography/TitleText";
 // types
 import { BudgetDataAPIResponse } from "../../@types/budgetData";
 import colorCode from "../../utils/colorCode";
+import SpendableCategory from "./SpendableCategory";
 
 interface SpendablesProps {
   isLoading: boolean;
@@ -22,97 +23,61 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           is for <b>savings</b> (e.g. in investments, savings accounts).
         </p>
       </div>
-      <div className="flex flex-col gap-5 w-ful">
-        <div className="flex gap-5 justify-between">
-          <div className="flex flex-col w-full">
-            <TitleText
-              className="text-lg break-normal w-full"
-              title="Needs (50%):"
-            />
-            <TitleText
-              className="text-md break-normal w-full"
-              title={`$${
-                budgetData && budgetData.current.needs.total.toFixed(2)
-              } total`}
-            />
-          </div>
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <TitleText
-              className={`text-lg break-normal w-full ${
-                budgetData &&
-                colorCode(
-                  budgetData.current.needs.remaining,
-                  budgetData.current.needs.total
-                )
-              }`}
-              title={`$${budgetData?.current.needs.remaining.toFixed(
-                2
-              )} remaining`}
-            />
-          )}
-        </div>
-        <div className="flex gap-5 justify-between">
-          <div className="flex flex-col w-full">
-            <TitleText
-              className="text-lg break-normal w-full"
-              title="Wants (30%):"
-            />
-            <TitleText
-              className="text-md break-normal w-full"
-              title={`$${
-                budgetData && budgetData.current.wants.total.toFixed(2)
-              } total`}
-            />
-          </div>
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <TitleText
-              className={`text-lg break-normal w-full ${
-                budgetData &&
-                colorCode(
-                  budgetData.current.wants.remaining,
-                  budgetData.current.wants.total
-                )
-              }`}
-              title={`$${budgetData?.current.wants.remaining.toFixed(
-                2
-              )} remaining`}
-            />
-          )}
-        </div>
-        <div className="flex gap-5 justify-between">
-          <div className="flex flex-col w-full">
-            <TitleText
-              className="text-lg break-normal w-full"
-              title="Savings (20%):"
-            />
-            <TitleText
-              className="text-md break-normal w-full"
-              title={`$${
-                budgetData && budgetData.current.savings.total.toFixed(2)
-              } total`}
-            />
-          </div>
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <TitleText
-              className={`text-lg break-normal w-full ${
-                budgetData &&
-                colorCode(
-                  budgetData.current.savings.remaining,
-                  budgetData.current.savings.total
-                )
-              }`}
-              title={`$${budgetData?.current.savings.remaining.toFixed(
-                2
-              )} remaining`}
-            />
-          )}
-        </div>
+      <div className="flex flex-col gap-5 w-full">
+        <SpendableCategory
+          isLoading={isLoading}
+          categoryName="Needs (50%)"
+          categoryTotal={`$${
+            budgetData && budgetData.current.needs.total.toFixed(2)
+          } total`}
+          categoryRemaining={`$${budgetData?.current.needs.remaining.toFixed(
+            2
+          )} remaining`}
+          colorCode={
+            (budgetData &&
+              colorCode(
+                budgetData.current.needs.remaining,
+                budgetData.current.needs.total
+              )) ||
+            ""
+          }
+        />
+        <SpendableCategory
+          isLoading={isLoading}
+          categoryName="Wants (50%)"
+          categoryTotal={`$${
+            budgetData && budgetData.current.wants.total.toFixed(2)
+          } total`}
+          categoryRemaining={`$${budgetData?.current.wants.remaining.toFixed(
+            2
+          )} remaining`}
+          colorCode={
+            (budgetData &&
+              colorCode(
+                budgetData.current.wants.remaining,
+                budgetData.current.wants.total
+              )) ||
+            ""
+          }
+        />
+        <SpendableCategory
+          isLoading={isLoading}
+          categoryName="Savings (50%)"
+          categoryTotal={`$${
+            budgetData && budgetData.current.savings.total.toFixed(2)
+          } total`}
+          categoryRemaining={`$${budgetData?.current.savings.remaining.toFixed(
+            2
+          )} remaining`}
+          colorCode={
+            (budgetData &&
+              colorCode(
+                budgetData.current.savings.remaining,
+                budgetData.current.savings.total
+              )) ||
+            ""
+          }
+        />
       </div>
     </div>
   );

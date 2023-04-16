@@ -66,7 +66,7 @@ export default function CurrBudgetDisplay({
                 }`}
                 title={
                   budgetData
-                    ? `$${budgetData?.current.budget.remaining}`
+                    ? `$${budgetData?.current.budget.remaining.toFixed(2)}`
                     : "Error finding budget data."
                 }
               />
@@ -82,10 +82,10 @@ export default function CurrBudgetDisplay({
                 }`}
                 title={
                   budgetData
-                    ? `(-$${
+                    ? `(-$${(
                         budgetData?.current.budget.total -
                         budgetData?.current.budget.remaining
-                      })`
+                      ).toFixed(2)})`
                     : ""
                 }
               />

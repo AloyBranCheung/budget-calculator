@@ -13,6 +13,7 @@ const colorCode = (remaining: number, total: number) => {
   if (percentage < 30) {
     return "bg-red-200";
   }
+  return "";
 };
 
 export default colorCode;
