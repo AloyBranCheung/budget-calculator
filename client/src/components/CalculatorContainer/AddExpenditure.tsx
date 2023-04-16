@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SectionTitle from "../UI/typography/SectionTitle";
 import { BudgetCategory } from "../../@types/budgetData";
 import FormInput from "../UI/form/FormInput";
@@ -7,7 +6,6 @@ import { useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 import { z } from "zod";
-import TitleText from "../UI/typography/TitleText";
 import useMutationUpdateBudgetCategories from "../../react-query/queryHooks/useMutationUpdateBudgetCategories";
 
 const defaultValues: z.infer<typeof addExpenditureValidationSchema> = {
@@ -29,7 +27,7 @@ export default function AddExpenditure() {
     resolver: zodResolver(addExpenditureValidationSchema),
     defaultValues,
   });
-  const { mutate } = useMutationUpdateBudgetCategories();
+  const { mutate, isLoading, isSuccess } = useMutationUpdateBudgetCategories();
 
   const watchCategory = watch("category");
 
@@ -87,13 +85,37 @@ export default function AddExpenditure() {
             </div>
 
             <div className="flex gap-5">
-              <Button
-                type="button"
-                label="Cancel"
-                className="w-min"
-                onClick={() => reset()}
-              />
-              <Button type="submit" label="Add" className="w-min" />
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  Loading...
+                </div>
+              ) : isSuccess ? (
+                <div className="flex gap-5 items-center">
+                  <Button
+                    type="button"
+                    onClick={() => reset(defaultValues)}
+                    label="Close"
+                  />
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      reset({ ...defaultValues, category: watch("category") })
+                    }
+                    label="Add More"
+                  />
+                </div>
+              ) : (
+                <>
+                  <Button
+                    type="button"
+                    label="Cancel"
+                    className="w-min"
+                    onClick={() => reset()}
+                  />
+
+                  <Button type="submit" label="Add" className="w-min" />
+                </>
+              )}
             </div>
           </div>
         )}

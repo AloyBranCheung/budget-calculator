@@ -29,7 +29,7 @@ export const updateBudgetCategories = async (
     if (newModel) {
       console.log("newmodel", newModel);
       // TODO: next() to update calculations middleware
-      res.status(200).send("OK");
+      next();
     } else {
       res.status(500).send("Error updating budget categories");
     }

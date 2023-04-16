@@ -6,6 +6,7 @@ const recalculateTotal = async (
   next: NextFunction
 ) => {
   console.log("recalculate total middleware");
+  res.status(200).send("Ok");
 };
 
 export default recalculateTotal;
