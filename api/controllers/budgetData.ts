@@ -57,6 +57,17 @@ export const updateBudgetData = async (
   }
 };
 
-export const resetBudgetData = async (req: Request, res: Response) => {
-  console.log("delete route hit");
+export const resetBudgetData = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await BudgetDataModel.findOneAndDelete({
+      firebaseUserUid: req.firebaseUid,
+    });
+    res.status(200).send("Ok");
+  } catch (error) {
+    next(error);
+  }
 };

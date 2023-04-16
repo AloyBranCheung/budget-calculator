@@ -24,7 +24,10 @@ export default function CurrBudgetDisplay({
     setUpdateAmount(Number(e.target.value));
   };
 
-  const handleClickUpdate = () => mutate(updateAmount);
+  const handleClickUpdate = () => {
+    mutate(updateAmount);
+    setUpdateAmount(0);
+  };
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
