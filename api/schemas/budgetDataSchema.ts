@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import { BudgetCategory } from "../@types/BudgetData";
+import { BudgetDataAPIResponse } from "../@types/budgetDataApiResponse";
 
 const CategorySchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
-  value: { type: Number, default: 0 },
+  amount: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
   description: { type: String, default: "" },
   categories: [
@@ -15,31 +17,31 @@ const CategorySchema = new mongoose.Schema({
   ],
 });
 
-const BudgetDataSchema = new mongoose.Schema(
+const BudgetDataSchema = new mongoose.Schema<BudgetDataAPIResponse>(
   {
     firebaseUserUid: { type: String, unique: true },
     current: {
-      budget: {
+      [BudgetCategory.Budget]: {
         total: { type: Number, default: 0 },
         remaining: { type: Number, default: 0 },
       },
-      needs: {
+      [BudgetCategory.Needs]: {
         total: { type: Number, default: 0 },
         remaining: { type: Number, default: 0 },
       },
-      wants: {
+      [BudgetCategory.Wants]: {
         total: { type: Number, default: 0 },
         remaining: { type: Number, default: 0 },
       },
-      savings: {
+      [BudgetCategory.Savings]: {
         total: { type: Number, default: 0 },
         remaining: { type: Number, default: 0 },
       },
     },
     categories: {
-      necessities: [CategorySchema],
-      wants: [CategorySchema],
-      Savings: [CategorySchema],
+      [BudgetCategory.Needs]: [CategorySchema],
+      [BudgetCategory.Wants]: [CategorySchema],
+      [BudgetCategory.Savings]: [CategorySchema],
     },
   },
   {

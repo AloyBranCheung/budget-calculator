@@ -2,46 +2,33 @@ import React from "react";
 import SectionTitle from "../UI/typography/SectionTitle";
 import ExpendCategory from "./ExpendCategory";
 import { ExpenditureItem } from "../../@types/expenditures";
+import { BudgetCategory, BudgetDataAPIResponse } from "../../@types/budgetData";
 
-const DUMMY_ITEMS: ExpenditureItem[] = [
-  {
-    id: 0,
-    value: 69,
-    date: 1681518044,
-    description: "food at gyugyuya",
-    categories: [
-      {
-        id: 0,
-        color: "white",
-        tagCategory: "Enum",
-        backgroundColor: "red",
-      },
-    ],
-  },
-  {
-    id: 0,
-    value: 69,
-    date: 1681518044,
-    description: "food at gyugyuya",
-    categories: [
-      {
-        id: 1,
-        color: "white",
-        tagCategory: "Enum",
-        backgroundColor: "red",
-      },
-    ],
-  },
-];
+interface ExpenditureHistoryProps {
+  isLoading: boolean;
+  budgetData: BudgetDataAPIResponse | undefined;
+}
 
-export default function ExpenditureHistory() {
+export default function ExpenditureHistory({
+  isLoading,
+  budgetData,
+}: ExpenditureHistoryProps) {
   return (
     <div>
       <SectionTitle className="mb-2" bold title="Expenditures" />
       <div className="flex flex-col gap-5">
-        <ExpendCategory items={DUMMY_ITEMS} title="Necessities" />
-        <ExpendCategory items={DUMMY_ITEMS} title="Wants" />
-        <ExpendCategory items={DUMMY_ITEMS} title="Savings" />
+        <ExpendCategory
+          items={budgetData?.categories[BudgetCategory.Needs] || []}
+          title="Necessities"
+        />
+        <ExpendCategory
+          items={budgetData?.categories[BudgetCategory.Wants] || []}
+          title="Wants"
+        />
+        <ExpendCategory
+          items={budgetData?.categories[BudgetCategory.Savings] || []}
+          title="Savings"
+        />
       </div>
     </div>
   );

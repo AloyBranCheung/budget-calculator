@@ -9,10 +9,12 @@ interface InputProps {
   isError?: boolean;
   errorMessage?: string;
   step?: string;
+  className?: string;
   min?: number;
 }
 
 export default function Input({
+  className,
   type,
   value,
   onChange,
@@ -30,7 +32,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="border-2 border-gray-300 rounded-md p-1"
+        className={`border-2 border-gray-300 rounded-md p-1 ${className}`}
         step={step}
         min={min}
       />

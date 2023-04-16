@@ -48,10 +48,25 @@ export const updateBudgetData = async (
         update,
         { new: true }
       );
-      res.status(200).send("Ok");
+      next();
     } else {
       res.status(500).send("Could not find data for user.");
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetBudgetData = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await BudgetDataModel.findOneAndDelete({
+      firebaseUserUid: req.firebaseUid,
+    });
+    res.status(200).send("Ok");
   } catch (error) {
     next(error);
   }

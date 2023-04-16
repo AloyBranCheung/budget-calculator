@@ -1,22 +1,30 @@
 import React from "react";
-import { ExpenditureItem } from "../../@types/expenditures";
 import SectionTitle from "../UI/typography/SectionTitle";
 import TitleText from "../UI/typography/TitleText";
 import Chip from "../UI/Chip";
+import { CategoryItems } from "../../@types/budgetData";
 
 interface ExpendItemProps {
-  item: ExpenditureItem;
+  item: CategoryItems;
 }
 
 export default function ExpendItem({ item }: ExpendItemProps) {
   return (
-    <div className="border-2 border-solid rounded-2xl border-black p-5 ">
-      <TitleText className="text-4xl" title={`$ ${item.value.toFixed(2)}`} />
-      <TitleText title={`Description: ${item.description}`} />
+    <div className="border-2 border-solid rounded-2xl border-black p-5 xs:max-w-min sm:max-w-xs">
+      <TitleText
+        bold
+        className="text-4xl bg-red-200"
+        title={`$ ${item.amount.toFixed(2)}`}
+      />
+      <div>
+        <TitleText bold title={`Description:`} />
+        <TitleText title={item.description} />
+      </div>
       <div className="flex gap-5">
-        <TitleText title="Tags:" />
+        <TitleText bold title="Tags:" />
         <div className="flex flex-wrap gap-1">
-          {item.categories.map((tag) => {
+          WIP
+          {/* {item.categories.map((tag) => {
             return (
               <Chip
                 key={`${tag.color}${tag.tagCategory}`}
@@ -25,7 +33,7 @@ export default function ExpendItem({ item }: ExpendItemProps) {
                 backgroundColor={tag.backgroundColor}
               />
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>

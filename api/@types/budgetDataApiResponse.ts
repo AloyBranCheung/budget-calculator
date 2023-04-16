@@ -6,7 +6,7 @@ export interface Tags {
 }
 
 export interface CategoryItems {
-  _id: string;
+  id: string;
   amount: number;
   date: Date;
   description: string;

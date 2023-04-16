@@ -21,38 +21,56 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           is for <b>savings</b> (e.g. in investments, savings accounts).
         </p>
       </div>
-      <div className="flex flex-col gap-5 w-max">
+      <div className="flex flex-col gap-5 w-ful">
         <div className="flex gap-5 justify-between">
-          <TitleText title="Needs (50%):" />
+          <TitleText
+            className="text-lg break-normal w-full"
+            title="Needs (50%):"
+          />
           {isLoading ? (
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.needs.remaining.toFixed(
+              className="text-lg break-normal w-full"
+              title={`$${budgetData?.current.needs.total.toFixed(
+                2
+              )} total -> $${budgetData?.current.needs.remaining.toFixed(
                 2
               )} remaining`}
             />
           )}
         </div>
         <div className="flex gap-5 justify-between">
-          <TitleText title="Wants (30%):" />
+          <TitleText
+            className="text-lg break-normal w-full"
+            title="Wants (30%):"
+          />
           {isLoading ? (
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.wants.remaining.toFixed(
+              className="text-lg break-normal w-full"
+              title={`$${budgetData?.current.wants.total.toFixed(
+                2
+              )} total -> $${budgetData?.current.wants.remaining.toFixed(
                 2
               )} remaining`}
             />
           )}
         </div>
         <div className="flex gap-5 justify-between">
-          <TitleText title="Savings (20%):" />
+          <TitleText
+            className="text-lg break-normal w-full"
+            title="Savings (20%):"
+          />
           {isLoading ? (
             <div>Loading...</div>
           ) : (
             <TitleText
-              title={`$${budgetData?.current.savings.remaining.toFixed(
+              className="text-lg break-normal w-full"
+              title={`$${budgetData?.current.savings.total.toFixed(
+                2
+              )} total -> $${budgetData?.current.savings.remaining.toFixed(
                 2
               )} remaining`}
             />

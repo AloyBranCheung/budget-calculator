@@ -24,7 +24,10 @@ export default function CurrBudgetDisplay({
     setUpdateAmount(Number(e.target.value));
   };
 
-  const handleClickUpdate = () => mutate(updateAmount);
+  const handleClickUpdate = () => {
+    mutate(updateAmount);
+    setUpdateAmount(0);
+  };
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
@@ -43,7 +46,7 @@ export default function CurrBudgetDisplay({
             <div>Loading...</div>
           ) : (
             <TitleText
-              className="!text-8xl my-5"
+              className="!text-8xl xs:!text-6xl my-5"
               title={`$${budgetData?.current.budget.remaining}`}
             />
           )}

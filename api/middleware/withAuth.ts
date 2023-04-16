@@ -17,6 +17,7 @@ const withAuth = async (
     try {
       const decodedIdToken = await auth.verifyIdToken(token);
       req.decodedIdToken = decodedIdToken;
+      req.firebaseUid = decodedIdToken.uid;
       next();
     } catch (error) {
       if (error instanceof Error) {
