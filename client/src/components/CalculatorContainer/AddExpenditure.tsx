@@ -35,6 +35,7 @@ export default function AddExpenditure() {
     data: z.infer<typeof addExpenditureValidationSchema>
   ) => {
     mutate(data);
+    reset({ ...defaultValues, category: watch("category") });
   };
 
   return (
@@ -96,13 +97,7 @@ export default function AddExpenditure() {
                     onClick={() => reset(defaultValues)}
                     label="Close"
                   />
-                  <Button
-                    type="button"
-                    onClick={() =>
-                      reset({ ...defaultValues, category: watch("category") })
-                    }
-                    label="Add More"
-                  />
+                  <Button type="submit" label="Add More" />
                 </div>
               ) : (
                 <>

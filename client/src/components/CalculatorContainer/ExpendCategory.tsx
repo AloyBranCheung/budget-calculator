@@ -22,7 +22,7 @@ export default function ExpendCategory({ title, items }: ExpendCategoryProps) {
         <KeyValueText label="Total:" value="$Value" />
         <KeyValueText label="Remaining:" value="$Value" />
       </div> */}
-      <div className="flex gap-2">{expenditureItems}</div>
+      <div className="flex gap-2 flex-wrap">{expenditureItems}</div>
     </div>
   );
 }

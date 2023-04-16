@@ -10,11 +10,18 @@ interface ExpendItemProps {
 
 export default function ExpendItem({ item }: ExpendItemProps) {
   return (
-    <div className="border-2 border-solid rounded-2xl border-black p-5 ">
-      <TitleText className="text-4xl" title={`$ ${item.amount.toFixed(2)}`} />
-      <TitleText title={`Description: ${item.description}`} />
+    <div className="border-2 border-solid rounded-2xl border-black p-5 xs:max-w-min sm:max-w-xs">
+      <TitleText
+        bold
+        className="text-4xl bg-red-200"
+        title={`$ ${item.amount.toFixed(2)}`}
+      />
+      <div>
+        <TitleText bold title={`Description:`} />
+        <TitleText title={item.description} />
+      </div>
       <div className="flex gap-5">
-        <TitleText title="Tags:" />
+        <TitleText bold title="Tags:" />
         <div className="flex flex-wrap gap-1">
           WIP
           {/* {item.categories.map((tag) => {
