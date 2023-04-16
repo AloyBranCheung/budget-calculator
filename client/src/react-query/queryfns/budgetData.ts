@@ -28,3 +28,8 @@ export const updateBudgetCategories = async (
   );
   return response.data;
 };
+
+export const resetBudgetData = async () => {
+  const response = await backendServer.delete<BudgetDataAPIResponse>("/data");
+  return response.data;
+};

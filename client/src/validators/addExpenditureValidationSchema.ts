@@ -11,7 +11,7 @@ const addExpenditureValidationSchema = z
         "",
       ])
       .default(""),
-    amount: z.number().positive(),
+    amount: z.number().positive().multipleOf(0.01),
     description: z.string(),
     date: z.date(),
   })

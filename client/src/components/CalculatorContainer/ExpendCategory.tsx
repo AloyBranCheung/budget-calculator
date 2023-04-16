@@ -12,7 +12,7 @@ interface ExpendCategoryProps {
 
 export default function ExpendCategory({ title, items }: ExpendCategoryProps) {
   const expenditureItems = items.map((item) => (
-    <ExpendItem key={`${item.id}-${item.description}`} item={item} />
+    <ExpendItem key={`${item._id}-${item.description}`} item={item} />
   ));
 
   return (

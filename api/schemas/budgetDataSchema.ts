@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { BudgetCategory } from "../@types/BudgetData";
+import { BudgetDataAPIResponse } from "../@types/budgetDataApiResponse";
 
 const CategorySchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
@@ -16,7 +17,7 @@ const CategorySchema = new mongoose.Schema({
   ],
 });
 
-const BudgetDataSchema = new mongoose.Schema(
+const BudgetDataSchema = new mongoose.Schema<BudgetDataAPIResponse>(
   {
     firebaseUserUid: { type: String, unique: true },
     current: {

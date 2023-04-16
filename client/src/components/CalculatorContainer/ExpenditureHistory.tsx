@@ -13,8 +13,6 @@ export default function ExpenditureHistory({
   isLoading,
   budgetData,
 }: ExpenditureHistoryProps) {
-  console.log(budgetData?.categories);
-
   return (
     <div>
       <SectionTitle className="mb-2" bold title="Expenditures" />

@@ -27,8 +27,6 @@ export const updateBudgetCategories = async (
       { new: true }
     );
     if (newModel) {
-      console.log("newmodel", newModel);
-      // TODO: next() to update calculations middleware
       next();
     } else {
       res.status(500).send("Error updating budget categories");

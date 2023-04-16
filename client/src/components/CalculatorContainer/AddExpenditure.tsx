@@ -76,6 +76,7 @@ export default function AddExpenditure() {
             <div>
               <p>Amount</p>
               <input
+                step={0.01}
                 type="number"
                 className={`border-2 border-gray-300 rounded-md p-1 w-min`}
                 {...register("amount", { valueAsNumber: true })}

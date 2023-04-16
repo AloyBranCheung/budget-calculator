@@ -48,11 +48,15 @@ export const updateBudgetData = async (
         update,
         { new: true }
       );
-      res.status(200).send("Ok");
+      next();
     } else {
       res.status(500).send("Could not find data for user.");
     }
   } catch (error) {
     next(error);
   }
+};
+
+export const resetBudgetData = async (req: Request, res: Response) => {
+  console.log("delete route hit");
 };
