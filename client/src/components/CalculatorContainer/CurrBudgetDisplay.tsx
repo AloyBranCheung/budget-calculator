@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 import useMutationUpdateTotalStartAmount from "../../react-query/queryHooks/useMutationUpdateTotalStartAmount";
 // types
 import { BudgetDataAPIResponse } from "../../@types/budgetData";
+import colorCode from "../../utils/colorCode";
 
 interface CurrBudgetDisplayProps {
   isLoading: boolean;
@@ -38,7 +39,13 @@ export default function CurrBudgetDisplay({
             <div>Loading...</div>
           ) : (
             <TitleText
-              className="bg-green-200"
+              className={`${
+                budgetData &&
+                colorCode(
+                  budgetData.current.budget.remaining,
+                  budgetData.current.budget.total
+                )
+              }`}
               title={`$${budgetData?.current.budget.total}`}
             />
           )}
@@ -52,12 +59,10 @@ export default function CurrBudgetDisplay({
               <TitleText
                 className={`!text-8xl xs:!text-6xl my-5 ${
                   budgetData &&
-                  (budgetData.current.budget.total /
-                    budgetData.current.budget.remaining) *
-                    100 >
-                    30
-                    ? "bg-green-200"
-                    : "bg-yellow-200"
+                  colorCode(
+                    budgetData.current.budget.remaining,
+                    budgetData.current.budget.total
+                  )
                 }`}
                 title={
                   budgetData
@@ -66,7 +71,15 @@ export default function CurrBudgetDisplay({
                 }
               />
               <TitleText
-                className="!text-4xl xs:!text-3xl my-5 bg-red-200"
+                className={`!text-4xl xs:!text-3xl my-5 ${
+                  budgetData &&
+                  Number.isNaN(
+                    budgetData.current.budget.total -
+                      budgetData.current.budget.remaining
+                  )
+                    ? ""
+                    : "bg-red-200"
+                }`}
                 title={
                   budgetData
                     ? `(-$${
