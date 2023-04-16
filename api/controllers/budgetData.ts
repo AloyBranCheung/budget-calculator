@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
 import calculateCurrSpendables from "../utils/calculateSpendables";
+import { BudgetCategory } from "../@types/budgetDataApiResponse";
 
 export const getBudgetData = async (
   req: Request,
@@ -41,6 +42,11 @@ export const updateBudgetData = async (
       const update = {
         current: {
           ...calculateCurrSpendables(totalStartingAmount),
+        },
+        categories: {
+          [BudgetCategory.Needs]: [],
+          [BudgetCategory.Wants]: [],
+          [BudgetCategory.Savings]: [],
         },
       };
       await BudgetDataModel.findOneAndUpdate(

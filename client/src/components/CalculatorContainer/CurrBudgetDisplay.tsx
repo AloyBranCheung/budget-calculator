@@ -37,7 +37,10 @@ export default function CurrBudgetDisplay({
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <TitleText title={`$${budgetData?.current.budget.total}`} />
+            <TitleText
+              className="bg-green-200"
+              title={`$${budgetData?.current.budget.total}`}
+            />
           )}
         </div>
         <TitleText title="Remaining Amount:" />
@@ -45,10 +48,35 @@ export default function CurrBudgetDisplay({
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <TitleText
-              className="!text-8xl xs:!text-6xl my-5"
-              title={`$${budgetData?.current.budget.remaining}`}
-            />
+            <div className="flex flex-col items-center justify-center">
+              <TitleText
+                className={`!text-8xl xs:!text-6xl my-5 ${
+                  budgetData &&
+                  (budgetData.current.budget.total /
+                    budgetData.current.budget.remaining) *
+                    100 >
+                    30
+                    ? "bg-green-200"
+                    : "bg-yellow-200"
+                }`}
+                title={
+                  budgetData
+                    ? `$${budgetData?.current.budget.remaining}`
+                    : "Error finding budget data."
+                }
+              />
+              <TitleText
+                className="!text-4xl xs:!text-3xl my-5 bg-red-200"
+                title={
+                  budgetData
+                    ? `(-$${
+                        budgetData?.current.budget.total -
+                        budgetData?.current.budget.remaining
+                      })`
+                    : ""
+                }
+              />
+            </div>
           )}
         </div>
       </div>
