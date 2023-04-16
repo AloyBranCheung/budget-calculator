@@ -10,7 +10,6 @@ export const updateBudgetCategories = async (
   const addExpenditureBody: AddExpenditureRequest = req.body;
   const { firebaseUid } = req;
   try {
-    console.log(addExpenditureBody.category);
     const newModel = await BudgetDataModel.findOneAndUpdate(
       {
         firebaseUserUid: firebaseUid,
