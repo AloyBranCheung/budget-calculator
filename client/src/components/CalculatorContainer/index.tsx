@@ -14,7 +14,7 @@ export default function Calculator() {
       <AddExpenditure />
       <CurrBudgetDisplay isLoading={isLoading} budgetData={budgetData} />
       <Spendables isLoading={isLoading} budgetData={budgetData} />
-      <ExpenditureHistory />
+      <ExpenditureHistory isLoading={isLoading} budgetData={budgetData} />
     </div>
   );
 }

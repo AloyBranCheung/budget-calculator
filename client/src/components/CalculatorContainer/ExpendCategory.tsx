@@ -1,13 +1,13 @@
 import React from "react";
 import TitleText from "../UI/typography/TitleText";
 // utils/types
-import { ExpenditureItem } from "../../@types/expenditures";
+import { CategoryItems } from "../../@types/budgetData";
 import ExpendItem from "./ExpendItem";
 import KeyValueText from "../UI/KeyValueText";
 
 interface ExpendCategoryProps {
   title: string;
-  items: ExpenditureItem[];
+  items: CategoryItems[];
 }
 
 export default function ExpendCategory({ title, items }: ExpendCategoryProps) {

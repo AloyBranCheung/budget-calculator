@@ -7,7 +7,7 @@ export interface Tags {
 
 export interface CategoryItems {
   id: string;
-  value: number;
+  amount: number;
   date: Date;
   description: string;
   categories: Tags[]; // tags
@@ -43,6 +43,8 @@ export interface BudgetDataAPIResponse {
   firebaseUserUid: string;
   current: CurrentBudgets;
   categories: {
-    necessities: CategoryItems[];
+    [BudgetCategory.Needs]: CategoryItems[];
+    [BudgetCategory.Wants]: CategoryItems[];
+    [BudgetCategory.Savings]: CategoryItems[];
   };
 }
