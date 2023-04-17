@@ -20,7 +20,11 @@ export default function SpendableCategory({
     <div className="flex gap-5 justify-between items-center">
       <div className="flex flex-col w-full">
         <TitleText className="text-lg break-normal " title={categoryName} />
-        <TitleText className="text-md break-normal " title={categoryTotal} />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <TitleText className="text-md break-normal " title={categoryTotal} />
+        )}
       </div>
       {isLoading ? (
         <div>Loading...</div>
