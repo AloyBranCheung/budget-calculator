@@ -43,7 +43,7 @@ jobs:
           echo VITE_BACKEND_BASE_URL:"$VITE_BACKEND_BASE_URL" >> .env
       - name: Create .env file Backend
         run: |
-          cd ../api && touch.env
+          cd ../api && touch .env
           ls -a
       - name: Install dependencies
         run: yarn install --frozen-lockfile
