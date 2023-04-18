@@ -12,20 +12,27 @@ jobs:
       run:
         working-directory: ./client
     env:
+      # Frontend
+      VITE_BACKEND_BASE_URL: ${{secrets.VITE_BACKEND_BASE_URL}}
       USER: ${{ secrets.PASSWORD }}
       PASSWORD: ${{ secrets.USER }}
-      TEST_FRONT_ENV_URL: ${{secrets.TEST_FRONT_ENV_URL}}
+      # Backend
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Create .env file
+      - name: Create .env file frontend
         run: |
           touch .env
-          echo TEST_FRONT_ENV_URL:"$TEST_FRONT_ENV_URL" >> .env
           echo USER:"$USER" >> .env
           echo PASSWORD:"$PASSWORD" >> .env
+          echo VITE_BACKEND_BASE_URL:"$VITE_BACKEND_BASE_URL" >> .env
+      - name: Create .env file Backend
+        run: |
+          cd ../api && touch.env
+          ls -a
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers

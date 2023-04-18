@@ -19,7 +19,7 @@ testWithLogin("logout", async ({ page, login }) => {
 });
 
 testWithLogin("unsuccessful login", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("/");
   // arrange
   const emailField = await page.getByPlaceholder("Email");
   const passwordField = await page.getByPlaceholder("Password");
