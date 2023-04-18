@@ -23,8 +23,8 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo USER=$USER >> .env
-          echo PASSWORD=$PASSWORD >> .env
+          echo TEST_ENV:$TEST_ENV
+          ls -a
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
