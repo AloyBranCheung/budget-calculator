@@ -15,14 +15,16 @@ jobs:
       USER: ${{ secrets.PASSWORD }}
       PASSWORD: ${{ secrets.USER }}
       TEST_ENV: ${{secrets.TEST_FRONT_ENV_URL}}
-      TEST_VAR: ${{secrets.TEST_VAR}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: test env var
-        run: echo $TEST_VAR
+      - name: Create .env file
+        run: |
+          touch .env
+          echo USER=$USER >> .env
+          echo PASSWORD=$PASSWORD >> .env
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
