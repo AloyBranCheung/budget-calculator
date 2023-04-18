@@ -97,6 +97,7 @@ export default function CurrBudgetDisplay({
         <TitleText title="Update Starting Amount?:" />
         <div className="flex gap-2">
           <Input
+            testId="addBudgetButton"
             value={Number(updateAmount).toString()}
             onChange={handleChangeAmount}
             type="number"

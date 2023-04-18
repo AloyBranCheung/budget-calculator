@@ -11,6 +11,7 @@ interface InputProps {
   step?: string;
   className?: string;
   min?: number;
+  testId?: string;
 }
 
 export default function Input({
@@ -24,10 +25,12 @@ export default function Input({
   errorMessage,
   step,
   min,
+  testId,
 }: InputProps) {
   return (
     <div>
       <input
+        data-testid={testId}
         type={type}
         value={value}
         onChange={onChange}

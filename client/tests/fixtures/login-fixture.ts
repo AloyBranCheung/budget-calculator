@@ -25,8 +25,9 @@ export const testWithLogin = base.extend({
     expect(await page.getByText("Current Spendables"));
 
     // act (add budget)
-    await page.getByRole("spinbutton").click();
-    await page.getByRole("spinbutton").fill("2000");
+    const addBudgetButton = await page.getByTestId("addBudgetButton");
+    await addBudgetButton.click();
+    await addBudgetButton.fill("2000");
     await page.getByRole("button", { name: "Update" }).click();
 
     // assert
