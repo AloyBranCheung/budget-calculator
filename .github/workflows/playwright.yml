@@ -6,22 +6,26 @@ on:
     branches: [main, master]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 120
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
     env:
       USER: ${{ secrets.PASSWORD }}
       PASSWORD: ${{ secrets.USER }}
+      TEST_ENV: ${{secrets.TEST_FRONT_ENV_URL}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Install dependencies
-        run: cd client && yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
-        run: cd client && npx playwright install --with-deps
+        run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: cd client && npx playwright test
+        run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:

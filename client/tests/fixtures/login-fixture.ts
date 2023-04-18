@@ -2,7 +2,7 @@ import { test as base, expect } from "@playwright/test";
 
 export const testWithLogin = base.extend({
   login: async ({ page }, use) => {
-    await page.goto("http://localhost:3000/");
+    await page.goto(process.env.TEST_FRONT_ENV_URL!);
     // arrange
     const emailField = await page.getByPlaceholder("Email");
     const passwordField = await page.getByPlaceholder("Password");
