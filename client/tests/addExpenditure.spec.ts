@@ -1,17 +1,8 @@
 import { testWithLogin } from "./fixtures/login-fixture.js";
 import { expect } from "@playwright/test";
 
-testWithLogin("add expenditure to needs", async ({ page, login }) => {
+testWithLogin("add expenditure to needs success", async ({ page, login }) => {
   await login;
-  // act
-  await page
-    .locator("div")
-    .filter({ hasText: /^Update$/ })
-    .getByRole("spinbutton")
-    .fill("2000");
-  await page.getByRole("button", { name: "Update" }).click();
-  // assert
-  expect(await page.getByRole("heading", { name: "$2000.00" }));
 
   // act
   await page.getByRole("combobox").selectOption("needs");
@@ -23,8 +14,22 @@ testWithLogin("add expenditure to needs", async ({ page, login }) => {
   await page.getByRole("button", { name: "Add" }).click();
 
   // assert
+  expect(await page.getByRole("heading", { name: "$1877.00" }));
   expect(await page.getByRole("heading", { name: "$877.00 remaining" }));
   expect(await page.getByText("$ 123.00"));
   expect(await page.getByText("Description:"));
   expect(await page.getByRole("heading", { name: "test add needs" }));
 });
+
+testWithLogin(
+  "form validation error when invalid expenditure added",
+  async ({ page, login }) => {
+    await login;
+    // act
+    await page.getByRole("combobox").selectOption("needs");
+    await page.getByRole("button", { name: "Add" }).click();
+
+    // assert
+    expect(await page.getByText("Number must be greater than 0"));
+  }
+);

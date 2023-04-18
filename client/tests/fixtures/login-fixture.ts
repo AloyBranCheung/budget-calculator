@@ -24,6 +24,14 @@ export const testWithLogin = base.extend({
     expect(await page.getByText("Current Budget"));
     expect(await page.getByText("Current Spendables"));
 
+    // act (add budget)
+    await page.getByRole("spinbutton").click();
+    await page.getByRole("spinbutton").fill("2000");
+    await page.getByRole("button", { name: "Update" }).click();
+
+    // assert
+    expect(await page.getByRole("heading", { name: "$2000.00" }));
+
     await use(page);
   },
 });
