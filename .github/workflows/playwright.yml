@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 18
       - name: test env var
-        run: echo ${{secrets.TEST_VAR}}
+        run: echo $TEST_VAR
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
