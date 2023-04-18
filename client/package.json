@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start-app": "concurrently \"yarn --cwd ../api/ dev\" \"yarn dev\""
+    "start-app": "concurrently \"yarn --cwd ../api/ dev\" \"yarn dev\"",
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.1",
