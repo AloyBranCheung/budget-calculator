@@ -20,8 +20,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: env check
-        run: echo ${{secrets.PASSWORD}} ${{secrets.TEST_FRONT_ENV_URL}} ${{secrets.USER}}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
