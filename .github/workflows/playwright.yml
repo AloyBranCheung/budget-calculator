@@ -43,8 +43,9 @@ jobs:
           echo VITE_BACKEND_BASE_URL:"$VITE_BACKEND_BASE_URL" >> .env
       - name: Create .env file Backend
         run: |
-          cd ../api && touch .env
-          ls -a
+          cd ../api 
+          touch .env
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers

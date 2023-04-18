@@ -88,7 +88,7 @@ export default defineConfig({
       command: "yarn --cwd ../api/ dev",
       port: 3001,
       timeout: 120 * 1000,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: true,
     },
   ],
 });
