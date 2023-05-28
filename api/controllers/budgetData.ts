@@ -1,7 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
 import calculateCurrSpendables from "../utils/calculateSpendables";
-import { BudgetCategory } from "../@types/budgetDataApiResponse";
+import {
+  BudgetCategory,
+  BudgetDataAPIResponse,
+} from "../@types/budgetDataApiResponse";
 
 export const getBudgetData = async (
   req: Request,
@@ -11,7 +14,7 @@ export const getBudgetData = async (
   // if user's document doesn't exist, create one for them and return an empty one
   try {
     if (req.decodedIdToken && req.decodedIdToken.uid) {
-      const budgetData = await BudgetDataModel.findOne({
+      const budgetData = await BudgetDataModel.findOne<BudgetDataAPIResponse>({
         firebaseUserUid: req.decodedIdToken.uid,
       });
       if (budgetData) {
@@ -38,26 +41,27 @@ export const updateBudgetData = async (
   const { totalStartingAmount } = req.body;
   const decodedToken = req.decodedIdToken;
   try {
-    if (decodedToken && decodedToken.uid) {
-      const update = {
-        current: {
-          ...calculateCurrSpendables(totalStartingAmount),
-        },
-        categories: {
-          [BudgetCategory.Needs]: [],
-          [BudgetCategory.Wants]: [],
-          [BudgetCategory.Savings]: [],
-        },
-      };
-      await BudgetDataModel.findOneAndUpdate(
-        { firebaseUserUid: decodedToken.uid },
-        update,
-        { new: true }
-      );
-      next();
-    } else {
-      res.status(500).send("Could not find data for user.");
-    }
+    if (!decodedToken || !decodedToken?.uid)
+      return res.status(500).send("Could not find data for user.");
+
+    // TODO: save current data to history
+
+    const updateNewStartingAmount = {
+      current: {
+        ...calculateCurrSpendables(totalStartingAmount),
+      },
+      categories: {
+        [BudgetCategory.Needs]: [],
+        [BudgetCategory.Wants]: [],
+        [BudgetCategory.Savings]: [],
+      },
+    };
+    await BudgetDataModel.findOneAndUpdate(
+      { firebaseUserUid: decodedToken.uid },
+      updateNewStartingAmount,
+      { new: true }
+    );
+    next();
   } catch (error) {
     next(error);
   }
