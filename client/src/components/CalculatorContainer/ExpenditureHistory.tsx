@@ -18,15 +18,27 @@ export default function ExpenditureHistory({
       <SectionTitle className="mb-2" bold title="Expenditures" />
       <div className="flex flex-col gap-5">
         <ExpendCategory
-          items={budgetData?.categories[BudgetCategory.Needs] || []}
+          items={
+            (budgetData?.categories &&
+              budgetData?.categories[BudgetCategory.Needs]) ||
+            []
+          }
           title="Necessities"
         />
         <ExpendCategory
-          items={budgetData?.categories[BudgetCategory.Wants] || []}
+          items={
+            (budgetData?.categories &&
+              budgetData?.categories[BudgetCategory.Wants]) ||
+            []
+          }
           title="Wants"
         />
         <ExpendCategory
-          items={budgetData?.categories[BudgetCategory.Savings] || []}
+          items={
+            (budgetData?.categories &&
+              budgetData?.categories[BudgetCategory.Savings]) ||
+            []
+          }
           title="Savings"
         />
       </div>

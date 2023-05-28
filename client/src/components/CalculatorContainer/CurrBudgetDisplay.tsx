@@ -29,6 +29,7 @@ export default function CurrBudgetDisplay({
     mutate(updateAmount);
     setUpdateAmount(0);
   };
+
   return (
     <div>
       <SectionTitle bold title="Current Budget" />
@@ -40,13 +41,15 @@ export default function CurrBudgetDisplay({
           ) : (
             <TitleText
               className={`${
-                budgetData &&
+                budgetData?.current &&
                 colorCode(
                   budgetData.current.budget.remaining,
                   budgetData.current.budget.total
                 )
               }`}
-              title={`$${budgetData?.current.budget.total}`}
+              title={`$${
+                budgetData?.current && budgetData?.current.budget.total
+              }`}
             />
           )}
         </div>
@@ -58,21 +61,21 @@ export default function CurrBudgetDisplay({
             <div className="flex flex-col items-center justify-center">
               <TitleText
                 className={`!text-8xl xs:!text-6xl my-5 ${
-                  budgetData &&
+                  budgetData?.current &&
                   colorCode(
                     budgetData.current.budget.remaining,
                     budgetData.current.budget.total
                   )
                 }`}
                 title={
-                  budgetData
+                  budgetData?.current
                     ? `$${budgetData?.current.budget.remaining.toFixed(2)}`
                     : "Error finding budget data."
                 }
               />
               <TitleText
                 className={`!text-4xl xs:!text-3xl my-5 ${
-                  budgetData &&
+                  budgetData?.current &&
                   Number.isNaN(
                     budgetData.current.budget.total -
                       budgetData.current.budget.remaining
@@ -81,7 +84,7 @@ export default function CurrBudgetDisplay({
                     : "bg-red-200"
                 }`}
                 title={
-                  budgetData
+                  budgetData?.current
                     ? `(-$${(
                         budgetData?.current.budget.total -
                         budgetData?.current.budget.remaining
@@ -97,6 +100,7 @@ export default function CurrBudgetDisplay({
         <TitleText title="Update Starting Amount?:" />
         <div className="flex gap-2">
           <Input
+            testId="addBudgetButton"
             value={Number(updateAmount).toString()}
             onChange={handleChangeAmount}
             type="number"

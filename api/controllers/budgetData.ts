@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
+import BudgetHistoryModel from "../models/BudgetHistoryModel";
 import calculateCurrSpendables from "../utils/calculateSpendables";
-import { BudgetCategory } from "../@types/budgetDataApiResponse";
+import {
+  BudgetCategory,
+  BudgetDataAPIResponse,
+} from "../@types/budgetDataApiResponse";
 
 export const getBudgetData = async (
   req: Request,
@@ -11,7 +15,7 @@ export const getBudgetData = async (
   // if user's document doesn't exist, create one for them and return an empty one
   try {
     if (req.decodedIdToken && req.decodedIdToken.uid) {
-      const budgetData = await BudgetDataModel.findOne({
+      const budgetData = await BudgetDataModel.findOne<BudgetDataAPIResponse>({
         firebaseUserUid: req.decodedIdToken.uid,
       });
       if (budgetData) {
@@ -38,26 +42,74 @@ export const updateBudgetData = async (
   const { totalStartingAmount } = req.body;
   const decodedToken = req.decodedIdToken;
   try {
-    if (decodedToken && decodedToken.uid) {
-      const update = {
-        current: {
-          ...calculateCurrSpendables(totalStartingAmount),
-        },
-        categories: {
-          [BudgetCategory.Needs]: [],
-          [BudgetCategory.Wants]: [],
-          [BudgetCategory.Savings]: [],
-        },
-      };
+    if (!decodedToken || !decodedToken?.uid)
+      return res.status(500).send("Could not find user.");
+
+    // save current paycheck historyr e.g. categories, budget remaining etc.
+    const currBudgetHistory = await BudgetHistoryModel.findOne({
+      firebaseUserUid: decodedToken.uid,
+    });
+    const currBudget = await BudgetDataModel.findOne({
+      firebaseUserUid: decodedToken.uid,
+    });
+
+    const updateNewStartingAmount = {
+      current: {
+        ...calculateCurrSpendables(totalStartingAmount),
+      },
+      categories: {
+        [BudgetCategory.Needs]: [],
+        [BudgetCategory.Wants]: [],
+        [BudgetCategory.Savings]: [],
+      },
+    };
+
+    if (!currBudget || !currBudget?.current || !currBudget?.categories) {
       await BudgetDataModel.findOneAndUpdate(
-        { firebaseUserUid: decodedToken.uid },
-        update,
-        { new: true }
+        {
+          firebaseUserUid: decodedToken.uid,
+        },
+        updateNewStartingAmount
       );
       next();
-    } else {
-      res.status(500).send("Could not find data for user.");
+      return;
     }
+
+    const historyObj = {
+      dateCreated: currBudget?.current.createdAt,
+      content: {
+        current: currBudget?.current,
+        categories: currBudget?.categories,
+      },
+    };
+
+    if (!currBudgetHistory) {
+      await BudgetHistoryModel.create({
+        firebaseUserUid: decodedToken.uid,
+        history: [historyObj],
+      });
+    } else {
+      await BudgetHistoryModel.findOneAndUpdate(
+        {
+          firebaseUserUid: decodedToken.uid,
+        },
+        {
+          $push: {
+            history: historyObj,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+    }
+
+    // update new paycheck starting amount
+    await BudgetDataModel.findOneAndUpdate(
+      { firebaseUserUid: decodedToken.uid },
+      updateNewStartingAmount
+    );
+    next();
   } catch (error) {
     next(error);
   }
