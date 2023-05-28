@@ -17,24 +17,20 @@ const CategorySchema = new mongoose.Schema({
   ],
 });
 
+const BudgetSchema = new mongoose.Schema(
+  {
+    total: { type: Number, default: 0 },
+    remaining: { type: Number, default: 0 },
+  },
+  { timestamps: true }
+);
+
 const CurrentTotalsSchema = new mongoose.Schema(
   {
-    [BudgetCategory.Budget]: {
-      total: { type: Number, default: 0 },
-      remaining: { type: Number, default: 0 },
-    },
-    [BudgetCategory.Needs]: {
-      total: { type: Number, default: 0 },
-      remaining: { type: Number, default: 0 },
-    },
-    [BudgetCategory.Wants]: {
-      total: { type: Number, default: 0 },
-      remaining: { type: Number, default: 0 },
-    },
-    [BudgetCategory.Savings]: {
-      total: { type: Number, default: 0 },
-      remaining: { type: Number, default: 0 },
-    },
+    [BudgetCategory.Budget]: BudgetSchema,
+    [BudgetCategory.Needs]: BudgetSchema,
+    [BudgetCategory.Wants]: BudgetSchema,
+    [BudgetCategory.Savings]: BudgetSchema,
   },
   {
     timestamps: true,
