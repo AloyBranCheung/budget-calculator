@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { queryClient } from "../main";
 import auth from "../utils/firebaseAppAuth";
 import {
   signInWithEmailAndPassword,
@@ -55,6 +56,7 @@ export default function useAuth() {
     try {
       startAsyncCall();
       await signOut(auth);
+      await queryClient.clear();
       endAsyncCall(false);
     } catch (error) {
       if (error instanceof Error) {

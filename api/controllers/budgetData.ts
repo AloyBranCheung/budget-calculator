@@ -43,7 +43,7 @@ export const updateBudgetData = async (
   const decodedToken = req.decodedIdToken;
   try {
     if (!decodedToken || !decodedToken?.uid)
-      return res.status(500).send("Could not find data for user.");
+      return res.status(500).send("Could not find user.");
 
     // save current paycheck historyr e.g. categories, budget remaining etc.
     const currBudgetHistory = await BudgetHistoryModel.findOne({
@@ -53,8 +53,27 @@ export const updateBudgetData = async (
       firebaseUserUid: decodedToken.uid,
     });
 
-    if (!currBudget || !currBudget?.current || !currBudget?.categories)
-      res.status(500).send("Could not find current budget data for user.");
+    const updateNewStartingAmount = {
+      current: {
+        ...calculateCurrSpendables(totalStartingAmount),
+      },
+      categories: {
+        [BudgetCategory.Needs]: [],
+        [BudgetCategory.Wants]: [],
+        [BudgetCategory.Savings]: [],
+      },
+    };
+
+    if (!currBudget || !currBudget?.current || !currBudget?.categories) {
+      await BudgetDataModel.findOneAndUpdate(
+        {
+          firebaseUserUid: decodedToken.uid,
+        },
+        updateNewStartingAmount
+      );
+      next();
+      return;
+    }
 
     const historyObj = {
       dateCreated: currBudget?.current.createdAt,
@@ -86,20 +105,9 @@ export const updateBudgetData = async (
     }
 
     // update new paycheck starting amount
-    const updateNewStartingAmount = {
-      current: {
-        ...calculateCurrSpendables(totalStartingAmount),
-      },
-      categories: {
-        [BudgetCategory.Needs]: [],
-        [BudgetCategory.Wants]: [],
-        [BudgetCategory.Savings]: [],
-      },
-    };
     await BudgetDataModel.findOneAndUpdate(
       { firebaseUserUid: decodedToken.uid },
-      updateNewStartingAmount,
-      { new: true }
+      updateNewStartingAmount
     );
     next();
   } catch (error) {
