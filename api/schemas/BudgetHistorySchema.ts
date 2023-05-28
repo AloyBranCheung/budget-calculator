@@ -1,9 +1,13 @@
 import { Schema } from "mongoose";
 import BudgetDataSchema from "./budgetDataSchema";
-import { BudgetHistoryApiResponsne } from "../@types/budgetHistory";
+import { BudgetHistoryApiResponse } from "../@types/budgetHistory";
 
-const BudgetHistorySchema = new Schema<BudgetHistoryApiResponsne>(
+const BudgetHistorySchema = new Schema<BudgetHistoryApiResponse>(
   {
+    firebaseUserUid: {
+      type: String,
+      unique: true,
+    },
     dateCreated: { type: Date },
     history: BudgetDataSchema,
   },

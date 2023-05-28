@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
+import BudgetHistoryModel from "../models/BudgetHistoryModel";
 import calculateCurrSpendables from "../utils/calculateSpendables";
 import {
   BudgetCategory,
@@ -45,7 +46,18 @@ export const updateBudgetData = async (
       return res.status(500).send("Could not find data for user.");
 
     // TODO: save current data to history
+    // save current paycheck historyr e.g. categories, budget remaining etc.
+    const currBudgetHistory = await BudgetHistoryModel.find({
+      firebaseUserUid: decodedToken.uid,
+    });
+    console.log("currBudgetHistory", currBudgetHistory);
+    if (currBudgetHistory.length < 1) {
+      // TODO: create a document
+    } else {
+      // TODO: update a document
+    }
 
+    // update new paycheck starting amount
     const updateNewStartingAmount = {
       current: {
         ...calculateCurrSpendables(totalStartingAmount),

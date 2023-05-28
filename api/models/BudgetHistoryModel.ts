@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import BudgetHistorySchema from "../schemas/BudgetHistorySchema";
-import { BudgetHistoryApiResponsne } from "../@types/budgetHistory";
+import { BudgetHistoryApiResponse } from "../@types/budgetHistory";
 
-const BudgetHistoryModel = mongoose.model<BudgetHistoryApiResponsne>(
+const BudgetHistoryModel = mongoose.model<BudgetHistoryApiResponse>(
   "BudgetHistory",
   BudgetHistorySchema
 );
