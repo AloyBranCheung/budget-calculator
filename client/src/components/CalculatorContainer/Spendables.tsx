@@ -45,7 +45,7 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
         />
         <SpendableCategory
           isLoading={isLoading}
-          categoryName="Wants (50%)"
+          categoryName="Wants (30%)"
           categoryTotal={`$${
             budgetData?.current && budgetData.current.wants.total.toFixed(2)
           } total`}
@@ -64,7 +64,7 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
         />
         <SpendableCategory
           isLoading={isLoading}
-          categoryName="Savings (50%)"
+          categoryName="Savings (20%)"
           categoryTotal={`$${
             budgetData?.current && budgetData.current.savings.total.toFixed(2)
           } total`}
