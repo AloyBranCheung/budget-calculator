@@ -47,14 +47,33 @@ export const updateBudgetData = async (
 
     // TODO: save current data to history
     // save current paycheck historyr e.g. categories, budget remaining etc.
-    const currBudgetHistory = await BudgetHistoryModel.find({
+    const currBudgetHistory = await BudgetHistoryModel.findOne({
       firebaseUserUid: decodedToken.uid,
     });
-    console.log("currBudgetHistory", currBudgetHistory);
-    if (currBudgetHistory.length < 1) {
+    const currBudget = await BudgetDataModel.findOne({
+      firebaseUserUid: decodedToken.uid,
+    });
+
+    if (!currBudget || !currBudget?.current || !currBudget?.categories)
+      res.status(500).send("Could not find current budget data for user.");
+
+    if (!currBudgetHistory) {
       // TODO: create a document
+      await BudgetHistoryModel.create({
+        firebaseUserUid: decodedToken.uid,
+        history: [
+          {
+            dateCreated: currBudget?.current.createdAt,
+            content: {
+              current: currBudget?.current,
+              categories: currBudget?.categories,
+            },
+          },
+        ],
+      });
     } else {
       // TODO: update a document
+      console.log("update the document); ");
     }
 
     // update new paycheck starting amount

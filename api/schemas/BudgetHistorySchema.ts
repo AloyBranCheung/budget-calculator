@@ -8,8 +8,12 @@ const BudgetHistorySchema = new Schema<BudgetHistoryApiResponse>(
       type: String,
       unique: true,
     },
-    dateCreated: { type: Date },
-    history: BudgetDataSchema,
+    history: [
+      {
+        dateCreated: Date,
+        content: BudgetDataSchema,
+      },
+    ],
   },
   {
     timestamps: true,

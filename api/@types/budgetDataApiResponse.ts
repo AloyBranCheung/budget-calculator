@@ -37,6 +37,7 @@ export interface CurrentBudgets {
     total: number;
     remaining: number;
   };
+  createdAt: Date;
 }
 
 export interface BudgetDataAPIResponse {
