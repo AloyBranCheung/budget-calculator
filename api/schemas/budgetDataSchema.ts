@@ -17,32 +17,46 @@ const CategorySchema = new mongoose.Schema({
   ],
 });
 
+const CurrentTotalsSchema = new mongoose.Schema(
+  {
+    [BudgetCategory.Budget]: {
+      total: { type: Number, default: 0 },
+      remaining: { type: Number, default: 0 },
+    },
+    [BudgetCategory.Needs]: {
+      total: { type: Number, default: 0 },
+      remaining: { type: Number, default: 0 },
+    },
+    [BudgetCategory.Wants]: {
+      total: { type: Number, default: 0 },
+      remaining: { type: Number, default: 0 },
+    },
+    [BudgetCategory.Savings]: {
+      total: { type: Number, default: 0 },
+      remaining: { type: Number, default: 0 },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const CategoriesSchema = new mongoose.Schema(
+  {
+    [BudgetCategory.Needs]: [CategorySchema],
+    [BudgetCategory.Wants]: [CategorySchema],
+    [BudgetCategory.Savings]: [CategorySchema],
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const BudgetDataSchema = new mongoose.Schema<BudgetDataAPIResponse>(
   {
     firebaseUserUid: { type: String, unique: true },
-    current: {
-      [BudgetCategory.Budget]: {
-        total: { type: Number, default: 0 },
-        remaining: { type: Number, default: 0 },
-      },
-      [BudgetCategory.Needs]: {
-        total: { type: Number, default: 0 },
-        remaining: { type: Number, default: 0 },
-      },
-      [BudgetCategory.Wants]: {
-        total: { type: Number, default: 0 },
-        remaining: { type: Number, default: 0 },
-      },
-      [BudgetCategory.Savings]: {
-        total: { type: Number, default: 0 },
-        remaining: { type: Number, default: 0 },
-      },
-    },
-    categories: {
-      [BudgetCategory.Needs]: [CategorySchema],
-      [BudgetCategory.Wants]: [CategorySchema],
-      [BudgetCategory.Savings]: [CategorySchema],
-    },
+    current: CurrentTotalsSchema,
+    categories: CategoriesSchema,
   },
   {
     timestamps: true,

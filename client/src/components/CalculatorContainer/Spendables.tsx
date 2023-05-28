@@ -28,13 +28,14 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           isLoading={isLoading}
           categoryName="Needs (50%)"
           categoryTotal={`$${
-            budgetData && budgetData.current.needs.total.toFixed(2)
+            budgetData?.current && budgetData.current.needs.total.toFixed(2)
           } total`}
-          categoryRemaining={`$${budgetData?.current.needs.remaining.toFixed(
-            2
-          )} remaining`}
+          categoryRemaining={`$${
+            budgetData?.current &&
+            budgetData?.current.needs.remaining.toFixed(2)
+          } remaining`}
           colorCode={
-            (budgetData &&
+            (budgetData?.current &&
               colorCode(
                 budgetData.current.needs.remaining,
                 budgetData.current.needs.total
@@ -46,13 +47,14 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           isLoading={isLoading}
           categoryName="Wants (50%)"
           categoryTotal={`$${
-            budgetData && budgetData.current.wants.total.toFixed(2)
+            budgetData?.current && budgetData.current.wants.total.toFixed(2)
           } total`}
-          categoryRemaining={`$${budgetData?.current.wants.remaining.toFixed(
-            2
-          )} remaining`}
+          categoryRemaining={`$${
+            budgetData?.current &&
+            budgetData?.current.wants.remaining.toFixed(2)
+          } remaining`}
           colorCode={
-            (budgetData &&
+            (budgetData?.current &&
               colorCode(
                 budgetData.current.wants.remaining,
                 budgetData.current.wants.total
@@ -64,13 +66,14 @@ export default function Spendables({ isLoading, budgetData }: SpendablesProps) {
           isLoading={isLoading}
           categoryName="Savings (50%)"
           categoryTotal={`$${
-            budgetData && budgetData.current.savings.total.toFixed(2)
+            budgetData?.current && budgetData.current.savings.total.toFixed(2)
           } total`}
-          categoryRemaining={`$${budgetData?.current.savings.remaining.toFixed(
-            2
-          )} remaining`}
+          categoryRemaining={`$${
+            budgetData?.current &&
+            budgetData?.current.savings.remaining.toFixed(2)
+          } remaining`}
           colorCode={
-            (budgetData &&
+            (budgetData?.current &&
               colorCode(
                 budgetData.current.savings.remaining,
                 budgetData.current.savings.total

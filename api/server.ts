@@ -22,8 +22,8 @@ app.get("/health-check", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect("/health-check")
-})
+  res.redirect("/health-check");
+});
 
 // Error middleware handler
 app.use(errorMiddleware);
