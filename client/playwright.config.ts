@@ -27,7 +27,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:3000",
-
+    // headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
@@ -81,14 +81,7 @@ export default defineConfig({
     {
       command: "yarn dev",
       port: 3000,
-      timeout: 120 * 1000,
       reuseExistingServer: !process.env.CI,
-    },
-    {
-      command: "yarn --cwd ../api/ dev",
-      port: 3001,
-      timeout: 120 * 1000,
-      reuseExistingServer: true,
     },
   ],
 });
