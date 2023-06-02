@@ -11,26 +11,11 @@ jobs:
       run:
         working-directory: ./client
     runs-on: ubuntu-latest
-    # env:
-    #   # Frontend
-    #   VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
-    #   USER: ${{ secrets.USER }}
-    #   PASSWORD: ${{ secrets.PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Create .env file
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-      # - name: Create .env file frontend
-      #   working-directory: ./client
-      #   run: |
-      #     touch .env
-      #     echo USER:"$USER" >> .env
-      #     echo PASSWORD:"$PASSWORD" >> .env
-      #     echo VITE_BACKEND_BASE_URL:"$VITE_BACKEND_BASE_URL" >> .env
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
