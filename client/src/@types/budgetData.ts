@@ -20,23 +20,16 @@ export enum BudgetCategory {
   Savings = "savings",
 }
 
+export interface Budget {
+  total: number;
+  remaining: number;
+}
+
 export interface CurrentBudgets {
-  budget: {
-    total: number;
-    remaining: number;
-  };
-  [BudgetCategory.Needs]: {
-    total: number;
-    remaining: number;
-  };
-  [BudgetCategory.Wants]: {
-    total: number;
-    remaining: number;
-  };
-  [BudgetCategory.Savings]: {
-    total: number;
-    remaining: number;
-  };
+  budget: Budget;
+  [BudgetCategory.Needs]: Budget;
+  [BudgetCategory.Wants]: Budget;
+  [BudgetCategory.Savings]: Budget;
 }
 
 export interface BudgetDataAPIResponse {
