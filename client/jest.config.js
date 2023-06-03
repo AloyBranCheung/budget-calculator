@@ -1,5 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
+export default {
   preset: "ts-jest",
   testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "\\.(css)$": "./mocks/styleMock.js",
+  },
 };

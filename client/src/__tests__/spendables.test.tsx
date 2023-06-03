@@ -50,7 +50,7 @@ const DIFF_TEST_PARAMS = [
 ];
 
 test.each(DIFF_TEST_PARAMS)(
-  "loads and displays spendables remaining (with corresponding green, yellow, red colors) and spendables total",
+  "it should load and display spendables remaining (with corresponding green, yellow, red colors) and spendables total",
   async ({
     budgetData,
     expectColor,
@@ -99,6 +99,5 @@ test.each(DIFF_TEST_PARAMS)(
       `$${expectSavingsRemaining}.00 remaining`
     );
     expect(savingsTotal).toHaveTextContent(`$${expectSavingsTotal}.00 total`);
-    screen.debug();
   }
 );

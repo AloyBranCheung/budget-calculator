@@ -10,10 +10,10 @@ const addExpenditureValidationSchema = z
         BudgetCategory.Wants,
         "",
       ])
-      .default(""),
+      .default(BudgetCategory.Wants),
     amount: z.number().positive().multipleOf(0.01),
-    description: z.string(),
-    date: z.date(),
+    description: z.string().nonempty({ message: "Can't be empty." }),
+    date: z.date().default(new Date()),
   })
   .required();
 
