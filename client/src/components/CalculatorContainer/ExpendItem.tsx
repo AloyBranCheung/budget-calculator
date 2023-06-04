@@ -39,7 +39,7 @@ export default function ExpendItem({
               <b>Amount:</b> {item.amount.toFixed(2)}
             </p>
             <p>
-              <b>Tags:</b> WIP{" "}
+              <b>Tags:</b> WIP
             </p>
           </div>
         </>
