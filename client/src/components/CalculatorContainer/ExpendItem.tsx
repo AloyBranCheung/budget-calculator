@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import TitleText from "../UI/typography/TitleText";
 import { CategoryItems } from "../../@types/budgetData";
-import Button from "../UI/Button";
 import dayjs from "dayjs";
 import ConfirmationDialog from "../UI/ConfirmationDialog";
 
@@ -16,39 +15,39 @@ export default function ExpendItem({
   onConfirm,
   category,
 }: ExpendItemProps) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [isConfirm, setIsConfirm] = useState(false);
-
-  const handlePromptConfirmation = () => {
-    setIsConfirm(true);
-    dialogRef?.current?.showModal();
-  };
-
-  const handleNo = () => {
-    setIsConfirm(false);
-    dialogRef?.current?.close();
-    5;
-  };
 
   return (
     <div className="border-2 border-solid rounded-2xl border-black p-5 xs:max-w-min sm:max-w-xs flex flex-col">
-      <ConfirmationDialog onConfirm={() => onConfirm(item._id, category)}>
+      <ConfirmationDialog
+        isOpen={isConfirm}
+        onNo={() => setIsConfirm(false)}
+        onConfirm={() => onConfirm(item._id, category)}
+      >
         <>
           <h3 className="text-2xl">
-            Are you sure you want to delete this expenditure?
+            <b>Are you sure you want to delete this expenditure?</b>
           </h3>
           <div>
-            <p>Date Added: {dayjs(item.date).format("YYYY-MM-DD")}</p>
-            <p>Name: {item.description}</p>
-            <p>Amount: {item.amount.toFixed(2)}</p>
-            <p>Tags: WIP </p>
+            <p>
+              <b>Date Added:</b> {dayjs(item.date).format("YYYY-MM-DD")}
+            </p>
+            <p>
+              <b>Name:</b> {item.description}
+            </p>
+            <p>
+              <b>Amount:</b> {item.amount.toFixed(2)}
+            </p>
+            <p>
+              <b>Tags:</b> WIP{" "}
+            </p>
           </div>
         </>
       </ConfirmationDialog>
 
       <div
         className="w-5 h-5 self-end cursor-pointer"
-        onClick={handlePromptConfirmation}
+        onClick={() => setIsConfirm(true)}
       >
         <img
           src="https://cdn-icons-png.flaticon.com/512/5368/5368396.png"
