@@ -6,8 +6,11 @@ import {
   updateBudgetData,
   resetBudgetData,
 } from "../controllers/budgetData";
-import { updateBudgetCategories } from "../controllers/budgetCategories";
-import recalculateTotal from "../middleware/calculateAndUpdateAllFields";
+import {
+  updateBudgetCategories,
+  deleteExpenditure,
+} from "../controllers/budgetCategories";
+import recalculateCurrTotal from "../middleware/calculateAndUpdateAllFields";
 
 const router = express.Router();
 
@@ -18,8 +21,7 @@ router.put("/data", updateBudgetData);
 router.delete("/data", resetBudgetData);
 
 router.put("/data/categories", updateBudgetCategories);
-router.use(recalculateTotal);
-
-// TODO: add middleware to recalculate everything at the end
+router.delete("/data/:expenditureId", deleteExpenditure);
+router.use(recalculateCurrTotal);
 
 export default router;

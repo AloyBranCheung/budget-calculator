@@ -34,3 +34,11 @@ export const updateBudgetCategories = async (
     next(error);
   }
 };
+
+export const deleteExpenditure = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("route hit");
+};

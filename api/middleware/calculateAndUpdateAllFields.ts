@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import BudgetDataModel from "../models/BudgetDataModel";
 import { BudgetCategory } from "../@types/budgetDataApiResponse";
 
-const recalculateTotal = async (
+const recalculateCurrTotal = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -54,4 +54,4 @@ const recalculateTotal = async (
   }
 };
 
-export default recalculateTotal;
+export default recalculateCurrTotal;
