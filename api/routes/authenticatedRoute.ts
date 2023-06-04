@@ -21,7 +21,7 @@ router.put("/data", updateBudgetData);
 router.delete("/data", resetBudgetData);
 
 router.put("/data/categories", updateBudgetCategories);
-router.delete("/data/:expenditureId", deleteExpenditure);
+router.delete("/data/:category/:expenditureId", deleteExpenditure);
 router.use(recalculateCurrTotal);
 
 export default router;

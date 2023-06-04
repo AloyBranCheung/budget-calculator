@@ -40,5 +40,33 @@ export const deleteExpenditure = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("route hit");
+  const { firebaseUid } = req;
+  const category = req.params.category;
+  const expenditureId = req.params.expenditureId;
+
+  if (!firebaseUid || !expenditureId) {
+    console.error(
+      "Invalid firebaseUid or expenditureId at deleteExpenditure controller"
+    );
+    res.status(400).send("Invalid request");
+  }
+
+  try {
+    await BudgetDataModel.findOneAndUpdate(
+      {
+        firebaseUserUid: firebaseUid,
+      },
+      {
+        $pull: {
+          [`categories.${category}`]: { _id: expenditureId },
+        },
+      }
+    );
+    next();
+  } catch (error) {
+    console.error(
+      "Error finding one and updating in deleteExpenditure controller."
+    );
+    next(error);
+  }
 };
