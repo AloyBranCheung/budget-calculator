@@ -13,7 +13,6 @@ testWithLogin(
     await page.locator('input[name="amount"]').click();
     await page.locator('input[name="amount"]').fill("0123");
     await page.getByRole("button", { name: "Add" }).click();
-    await page.getByRole("heading", { name: "test remove this" }).click();
     // expect successful add
     expect(
       await page.getByRole("heading", { name: "test remove this", exact: true })
