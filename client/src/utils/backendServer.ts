@@ -1,7 +1,7 @@
 import axios from "axios";
 import getFirebaseIdtoken from "./firebaseGetIdToken";
 
-const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
+const baseUrl = process.env.VITE_BACKEND_BASE_URL;
 
 const backendServer = axios.create({
   baseURL: baseUrl,

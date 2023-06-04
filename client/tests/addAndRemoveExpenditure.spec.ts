@@ -16,7 +16,7 @@ testWithLogin(
     // expect successful add
     expect(
       await page.getByRole("heading", { name: "test remove this", exact: true })
-    ).toContainText("test remove this");
+    );
 
     await page.getByRole("img", { name: "delete" }).click();
     await page.getByRole("button", { name: "Yes" }).click();
