@@ -49,10 +49,7 @@ export default function ExpendItem({
         className="w-5 h-5 self-end cursor-pointer"
         onClick={() => setIsConfirm(true)}
       >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/5368/5368396.png"
-          alt="delete"
-        />
+        <img src="assets/icons/cross-icon.png" alt="delete" />
       </div>
       <TitleText
         bold
