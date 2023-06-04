@@ -3,25 +3,32 @@ import TitleText from "../UI/typography/TitleText";
 // utils/types
 import { CategoryItems } from "../../@types/budgetData";
 import ExpendItem from "./ExpendItem";
-import KeyValueText from "../UI/KeyValueText";
 
 interface ExpendCategoryProps {
   title: string;
   items: CategoryItems[];
+  onConfirm: (
+    itemId: string,
+    dialogRef: React.MutableRefObject<HTMLDialogElement | null>
+  ) => void;
 }
 
-export default function ExpendCategory({ title, items }: ExpendCategoryProps) {
+export default function ExpendCategory({
+  title,
+  items,
+  onConfirm,
+}: ExpendCategoryProps) {
   const expenditureItems = items.map((item) => (
-    <ExpendItem key={`${item._id}-${item.description}`} item={item} />
+    <ExpendItem
+      key={`${item._id}-${item.description}`}
+      item={item}
+      onConfirm={onConfirm}
+    />
   ));
 
   return (
     <div className="flex flex-col gap-2">
       <TitleText bold title={title} />
-      {/* <div>
-        <KeyValueText label="Total:" value="$Value" />
-        <KeyValueText label="Remaining:" value="$Value" />
-      </div> */}
       <div className="flex gap-2 flex-wrap">{expenditureItems}</div>
     </div>
   );
