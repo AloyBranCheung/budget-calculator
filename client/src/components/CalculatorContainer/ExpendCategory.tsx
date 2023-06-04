@@ -3,14 +3,12 @@ import TitleText from "../UI/typography/TitleText";
 // utils/types
 import { CategoryItems } from "../../@types/budgetData";
 import ExpendItem from "./ExpendItem";
+import { startCase } from "lodash";
 
 interface ExpendCategoryProps {
   title: string;
   items: CategoryItems[];
-  onConfirm: (
-    itemId: string,
-    dialogRef: React.MutableRefObject<HTMLDialogElement | null>
-  ) => void;
+  onConfirm: (itemId: string, category: string) => void;
 }
 
 export default function ExpendCategory({
@@ -22,13 +20,14 @@ export default function ExpendCategory({
     <ExpendItem
       key={`${item._id}-${item.description}`}
       item={item}
+      category={title}
       onConfirm={onConfirm}
     />
   ));
 
   return (
     <div className="flex flex-col gap-2">
-      <TitleText bold title={title} />
+      <TitleText bold title={startCase(title)} />
       <div className="flex gap-2 flex-wrap">{expenditureItems}</div>
     </div>
   );

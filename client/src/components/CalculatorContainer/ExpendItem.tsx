@@ -1,18 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import TitleText from "../UI/typography/TitleText";
 import { CategoryItems } from "../../@types/budgetData";
 import Button from "../UI/Button";
 import dayjs from "dayjs";
+import ConfirmationDialog from "../UI/ConfirmationDialog";
 
 interface ExpendItemProps {
   item: CategoryItems;
-  onConfirm: (
-    itemId: string,
-    dialogRef: React.MutableRefObject<HTMLDialogElement | null>
-  ) => void;
+  category: string;
+  onConfirm: (itemId: string, category: string) => void;
 }
 
-export default function ExpendItem({ item, onConfirm }: ExpendItemProps) {
+export default function ExpendItem({
+  item,
+  onConfirm,
+  category,
+}: ExpendItemProps) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [isConfirm, setIsConfirm] = useState(false);
 
@@ -24,12 +27,13 @@ export default function ExpendItem({ item, onConfirm }: ExpendItemProps) {
   const handleNo = () => {
     setIsConfirm(false);
     dialogRef?.current?.close();
+    5;
   };
 
   return (
     <div className="border-2 border-solid rounded-2xl border-black p-5 xs:max-w-min sm:max-w-xs flex flex-col">
-      <dialog ref={dialogRef} open={isConfirm}>
-        <div className="flex flex-col gap-5">
+      <ConfirmationDialog onConfirm={() => onConfirm(item._id, category)}>
+        <>
           <h3 className="text-2xl">
             Are you sure you want to delete this expenditure?
           </h3>
@@ -39,15 +43,9 @@ export default function ExpendItem({ item, onConfirm }: ExpendItemProps) {
             <p>Amount: {item.amount.toFixed(2)}</p>
             <p>Tags: WIP </p>
           </div>
-          <div className="flex gap-5 justify-end">
-            <button onClick={handleNo}>No</button>
-            <Button
-              label="Yes"
-              onClick={() => onConfirm(item._id, dialogRef)}
-            />
-          </div>
-        </div>
-      </dialog>
+        </>
+      </ConfirmationDialog>
+
       <div
         className="w-5 h-5 self-end cursor-pointer"
         onClick={handlePromptConfirmation}
