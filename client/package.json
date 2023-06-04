@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "start-app": "concurrently \"yarn --cwd ../api/ dev\" \"yarn dev\"",
     "test-jest": "jest ./__tests__ --watch",
-    "test-e2e": "npx playwright test"
+    "test-e2e": "npx playwright test",
+    "test-e2e-ui": "npx playwright test --ui",
+    "act-jest": "act -j Jest_Tests",
+    "act-pw": "act -j Playwright_Tests"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.1",
