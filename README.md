@@ -2,6 +2,7 @@
 
 To install:
 
+- start Docker Enginer/Docker Desktop
 - add .env files to both `client/` and `api/`
 - run `install.sh`
 
