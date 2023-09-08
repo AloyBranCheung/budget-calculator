@@ -1,11 +1,11 @@
-import { BudgetDataAPIResponse } from "./budgetDataApiResponse";
+import { type BudgetDataAPIResponse } from "./budgetDataApiResponse";
 
 export interface BudgetHistory {
-  dateCreated: Date;
-  content: Omit<BudgetDataAPIResponse, "firebaseUserUid">[];
+  dateCreated: Date
+  content: Array<Omit<BudgetDataAPIResponse, "firebaseUserUid">>
 }
 
 export interface BudgetHistoryApiResponse {
-  firebaseUserUid: string;
-  history: BudgetHistory[];
+  firebaseUserUid: string
+  history: BudgetHistory[]
 }

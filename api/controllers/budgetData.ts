@@ -1,14 +1,14 @@
-import { NextFunction, Response } from "express";
+import { type NextFunction, type Response } from "express";
 // models
 import BudgetDataModel from "../models/BudgetDataModel";
 import BudgetHistoryModel from "../models/BudgetHistoryModel";
 // utils
 import calculateCurrSpendables from "../utils/calculateSpendables";
 // types
-import { RequestWithDecodedIdToken } from "../middleware/withAuth";
+import { type RequestWithDecodedIdToken } from "../middleware/withAuth";
 import {
   BudgetCategory,
-  BudgetDataAPIResponse,
+  type BudgetDataAPIResponse,
 } from "../@types/budgetDataApiResponse";
 
 export const getBudgetData = async (
@@ -18,11 +18,11 @@ export const getBudgetData = async (
 ) => {
   // if user's document doesn't exist, create one for them and return an empty one
   try {
-    if (req.decodedIdToken && req.decodedIdToken.uid) {
+    if (req.decodedIdToken != null && req.decodedIdToken.uid) {
       const budgetData = await BudgetDataModel.findOne<BudgetDataAPIResponse>({
         firebaseUserUid: req.decodedIdToken.uid,
       });
-      if (budgetData) {
+      if (budgetData != null) {
         res.send(budgetData);
       } else {
         const newDocument = await new BudgetDataModel({
@@ -46,8 +46,9 @@ export const updateBudgetData = async (
   const { totalStartingAmount } = req.body;
   const decodedToken = req.decodedIdToken;
   try {
-    if (!decodedToken || !decodedToken?.uid)
+    if (decodedToken == null || !decodedToken?.uid) {
       return res.status(500).send("Could not find user.");
+    }
 
     // save current paycheck historyr e.g. categories, budget remaining etc.
     const currBudgetHistory = await BudgetHistoryModel.findOne({
@@ -68,7 +69,7 @@ export const updateBudgetData = async (
       },
     };
 
-    if (!currBudget || !currBudget?.current || !currBudget?.categories) {
+    if (currBudget == null || !currBudget?.current || !currBudget?.categories) {
       await BudgetDataModel.findOneAndUpdate(
         {
           firebaseUserUid: decodedToken.uid,
@@ -87,7 +88,7 @@ export const updateBudgetData = async (
       },
     };
 
-    if (!currBudgetHistory) {
+    if (currBudgetHistory == null) {
       await BudgetHistoryModel.create({
         firebaseUserUid: decodedToken.uid,
         history: [historyObj],

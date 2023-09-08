@@ -1,9 +1,9 @@
-import { Response, NextFunction } from "express";
+import { type Response, type NextFunction } from "express";
 // models
 import BudgetDataModel from "../models/BudgetDataModel";
 // types
 import { BudgetCategory } from "../@types/budgetDataApiResponse";
-import { RequestWithDecodedIdToken } from "./withAuth";
+import { type RequestWithDecodedIdToken } from "./withAuth";
 
 const recalculateCurrTotal = async (
   req: RequestWithDecodedIdToken,
@@ -14,7 +14,7 @@ const recalculateCurrTotal = async (
     const currDocument = await BudgetDataModel.findOne({
       firebaseUserUid: req.firebaseUid,
     });
-    if (currDocument) {
+    if (currDocument != null) {
       // recalculate remainder
       currDocument.current.budget.remaining = currDocument.current.budget.total;
       currDocument.current.needs.remaining = currDocument.current.needs.total;

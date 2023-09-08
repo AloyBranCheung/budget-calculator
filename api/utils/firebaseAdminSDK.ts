@@ -1,5 +1,8 @@
-const admin = require("firebase-admin");
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { getAuth, Auth } from "firebase-admin/auth";
+import admin, { ServiceAccount } from "firebase-admin";
 
 let auth = null;
 
@@ -19,7 +22,7 @@ if (!auth) {
   };
 
   const app = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(serviceAccount as ServiceAccount),
   });
 
   auth = getAuth(app);

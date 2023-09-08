@@ -1,4 +1,4 @@
-import { CurrentBudget } from "../@types/BudgetData";
+import { type CurrentBudget } from "../@types/BudgetData";
 
 const calculateCurrSpendables = (totalAmount: number): CurrentBudget => {
   const budget = {

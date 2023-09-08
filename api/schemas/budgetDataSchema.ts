@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { BudgetCategory } from "../@types/BudgetData";
-import { BudgetDataAPIResponse } from "../@types/budgetDataApiResponse";
+import { type BudgetDataAPIResponse } from "../@types/budgetDataApiResponse";
 
 const CategorySchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,

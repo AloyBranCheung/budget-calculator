@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import { DecodedIdToken } from "firebase-admin/auth";
+import { type Request, type Response, type NextFunction } from "express";
+import { type DecodedIdToken } from "firebase-admin/auth";
 import auth from "../utils/firebaseAdminSDK";
 
 export interface RequestWithDecodedIdToken extends Request {
-  decodedIdToken?: DecodedIdToken;
-  firebaseUid?: string;
+  decodedIdToken?: DecodedIdToken
+  firebaseUid?: string
 }
 
 const withAuth = async (

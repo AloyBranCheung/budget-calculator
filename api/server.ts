@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-dotenv.config();
 import auth from "./utils/firebaseAdminSDK";
 import express from "express";
 import connectMongoose from "./utils/connectMongoose";
@@ -8,9 +7,10 @@ import cors from "cors";
 import authenticatedRoute from "./routes/authenticatedRoute";
 // middlewares
 import errorMiddleware from "./middleware/errorHandler";
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT ?? 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +28,8 @@ app.get("/", (req, res) => {
 // Error middleware handler
 app.use(errorMiddleware);
 
-app.listen(port, () => {
-  connectMongoose();
+app.listen(port, async () => {
+  await connectMongoose();
   if (auth) {
     console.log("Firebase auth is initialized");
   }

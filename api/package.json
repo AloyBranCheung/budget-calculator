@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --legacy-watch",
+    "lint": "eslint --ext .tsx,.ts --fix -c .eslintrc.json ./",
     "build": "tsc -p .",
     "build-docker-image": "docker build -t budget-api .",
     "run-docker-image": "docker run -p 3001:3001 --env-file ./.env --rm budget-api"
