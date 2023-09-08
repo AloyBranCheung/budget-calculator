@@ -1,6 +1,6 @@
-FROM node:alpine
+FROM node:18-bookworm-slim
 WORKDIR /app
-COPY . .
+COPY ./package.json .
 RUN yarn global add typescript
 RUN yarn install 
-CMD ["yarn", "dev"]
+CMD ["yarn", "run", "dev"]
