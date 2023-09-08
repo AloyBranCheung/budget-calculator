@@ -106,6 +106,7 @@ export default function CurrBudgetDisplay({
             type="number"
             step="0.01"
             min={0}
+            className="w-full"
           />
           <Button onClick={handleClickUpdate} label="Update" />
         </div>
