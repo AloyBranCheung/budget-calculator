@@ -8,6 +8,7 @@ const addSavingsGoal = async (
   next: NextFunction
 ) => {
   console.log("addSavingsGoal route hit");
+  res.send("Hello world");
 };
 
 export default addSavingsGoal;

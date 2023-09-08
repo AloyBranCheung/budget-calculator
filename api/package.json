@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "dev": "nodemon --legacy-watch",
     "build": "tsc -p .",
     "build-docker-image": "docker build -t budget-api .",
     "run-docker-image": "docker run -p 3001:3001 --env-file ./.env --rm budget-api"
@@ -17,6 +17,7 @@
     "firebase-admin": "^11.6.0",
     "mongodb": "^5.2.0",
     "mongoose": "^7.0.3",
+    "ts-node": "^10.9.1",
     "typescript": "*"
   },
   "devDependencies": {

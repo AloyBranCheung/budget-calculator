@@ -1,9 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
+// models
 import BudgetDataModel from "../models/BudgetDataModel";
+// types
 import { BudgetCategory } from "../@types/budgetDataApiResponse";
+import { RequestWithDecodedIdToken } from "./withAuth";
 
 const recalculateCurrTotal = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {

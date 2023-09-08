@@ -1,14 +1,18 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
+// models
 import BudgetDataModel from "../models/BudgetDataModel";
 import BudgetHistoryModel from "../models/BudgetHistoryModel";
+// utils
 import calculateCurrSpendables from "../utils/calculateSpendables";
+// types
+import { RequestWithDecodedIdToken } from "../middleware/withAuth";
 import {
   BudgetCategory,
   BudgetDataAPIResponse,
 } from "../@types/budgetDataApiResponse";
 
 export const getBudgetData = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {
@@ -35,7 +39,7 @@ export const getBudgetData = async (
 };
 
 export const updateBudgetData = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {
@@ -116,7 +120,7 @@ export const updateBudgetData = async (
 };
 
 export const resetBudgetData = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {

@@ -1,9 +1,12 @@
-import { NextFunction, Request, Response } from "express";
-import { AddExpenditureRequest } from "../@types/addExpenditure";
+import { NextFunction, Response } from "express";
+// models
 import BudgetDataModel from "../models/BudgetDataModel";
+// types
+import { AddExpenditureRequest } from "../@types/addExpenditure";
+import { RequestWithDecodedIdToken } from "../middleware/withAuth";
 
 export const updateBudgetCategories = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {
@@ -36,7 +39,7 @@ export const updateBudgetCategories = async (
 };
 
 export const deleteExpenditure = async (
-  req: Request,
+  req: RequestWithDecodedIdToken,
   res: Response,
   next: NextFunction
 ) => {
