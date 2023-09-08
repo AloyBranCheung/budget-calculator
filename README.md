@@ -2,6 +2,7 @@
 
 To install:
 
+- add .env files to both `client/` and `api/`
 - run `install.sh`
 
 To run:
