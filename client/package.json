@@ -19,11 +19,13 @@
     "@lukemorales/query-key-factory": "^1.2.0",
     "@tanstack/react-query": "^4.29.2",
     "@tanstack/react-query-devtools": "^4.29.2",
-    "@types/testing-library__react": "^10.2.0",
     "@types/lodash": "^4.14.195",
+    "@types/testing-library__react": "^10.2.0",
     "axios": "^1.3.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
+    "eslint": "^8.48.0",
+    "eslint-config-react-app": "^7.0.1",
     "firebase": "^9.19.1",
     "framer-motion": "^10.12.2",
     "lodash": "^4.17.21",
@@ -35,6 +37,7 @@
     "ts-jest": "^29.1.0",
     "tw-elements": "^1.0.0-beta2",
     "vite-plugin-environment": "^1.1.3",
+    "vite-plugin-eslint": "^1.8.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {
