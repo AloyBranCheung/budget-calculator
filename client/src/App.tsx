@@ -1,5 +1,4 @@
 import "react-toastify/dist/ReactToastify.css";
-import PageTitle from "./components/UI/typography/PageTitle";
 import GutterContainer from "./components/layout/GutterContainer";
 import CalculatorContainer from "./components/CalculatorContainer";
 import Navbar from "./components/Navbar";

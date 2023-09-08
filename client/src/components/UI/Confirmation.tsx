@@ -1,4 +1,3 @@
-import { useState } from "react";
 import TitleText from "./typography/TitleText";
 import Button from "./Button";
 

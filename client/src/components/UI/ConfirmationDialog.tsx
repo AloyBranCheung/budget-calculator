@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Button from "./Button";
 
 interface ConfirmationDialogProps {
@@ -17,14 +17,15 @@ export default function ConfirmationDialog({
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
-    dialogRef?.current?.removeAttribute("open");
+    const dialogRefCurrent = dialogRef?.current;
+    dialogRefCurrent?.removeAttribute("open");
 
     if (isOpen) {
-      dialogRef?.current?.showModal();
+      dialogRefCurrent?.showModal();
     } else {
-      dialogRef?.current?.close();
+      dialogRefCurrent?.close();
     }
-    return () => dialogRef?.current?.close();
+    return () => dialogRefCurrent?.close();
   }, [isOpen]);
 
   return (

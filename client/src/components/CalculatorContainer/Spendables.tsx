@@ -1,6 +1,5 @@
 import React from "react";
 import SectionTitle from "../UI/typography/SectionTitle";
-import TitleText from "../UI/typography/TitleText";
 // types
 import { BudgetDataAPIResponse } from "../../@types/budgetData";
 import colorCode from "../../utils/colorCode";
