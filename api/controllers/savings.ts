@@ -9,13 +9,7 @@ const addSavingsGoal = async (
   next: NextFunction
 ) => {
   const { firebaseUid } = req;
-  const {
-    currentAmountContributed,
-    descriptionOfGoal,
-    nameOfGoal,
-    targetAmount,
-  } = req.body;
-  console.log("req.body", req.body);
+  const { descriptionOfGoal, nameOfGoal, targetAmount } = req.body;
   if (!firebaseUid) {
     next(new Error("No firebase uid"));
   }
@@ -37,7 +31,7 @@ const addSavingsGoal = async (
           firebaseUserUid: firebaseUid,
         },
         {
-          currentAmountContributed,
+          currentAmountContributed: 0,
           descriptionOfGoal,
           nameOfGoal,
           targetAmount,

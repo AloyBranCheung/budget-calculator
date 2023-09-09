@@ -19,5 +19,5 @@ export const addSavingsGoal = async (
 export const contributeToGoal = async (
   data: z.infer<typeof contributeValSchema>
 ) => {
-  console.log("qeuryfn", data);
+  await backendServer.post("/savings-goal/contribute", data);
 };

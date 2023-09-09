@@ -42,6 +42,8 @@ export default function SavingsGoal({
 
   const handleFormSubmit = (data: z.infer<typeof contributeValSchema>) => {
     mutate(data);
+    setIsContribute(false);
+    reset();
   };
 
   return (
@@ -49,7 +51,9 @@ export default function SavingsGoal({
       <div className="flex items-center gap-2">
         <SectionTitle title="Savings Goal" bold />
         <Button label="Edit" onClick={() => setIsEdit(true)} />
-        <Button label="Contribute" onClick={() => setIsContribute(true)} />
+        {!isEdit && (
+          <Button label="Contribute" onClick={() => setIsContribute(true)} />
+        )}
       </div>
       {isEdit ? (
         <EditSavingsGoal
