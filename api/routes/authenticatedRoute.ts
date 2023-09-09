@@ -1,10 +1,7 @@
 import express from "express";
 import withAuth from "../middleware/withAuth";
 // controllers
-import addSavingsGoal, {
-  getSavingsGoal,
-  // updateSavingsGoal,
-} from "../controllers/savings";
+import addSavingsGoal, { getSavingsGoal } from "../controllers/savings";
 import {
   getBudgetData,
   updateBudgetData,
@@ -29,7 +26,7 @@ router.delete("/data", resetBudgetData);
 // savings goal
 router.get("/savings-goal", getSavingsGoal);
 router.post("/savings-goal", addSavingsGoal); // add
-// router.put("/savings-goal", updateSavingsGoal); // update
+router.post("/savings-goal/contribute");
 
 // budget categories/expenditures
 router.put("/data/categories", updateBudgetCategories);

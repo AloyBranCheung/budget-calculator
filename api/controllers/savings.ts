@@ -53,39 +53,6 @@ const addSavingsGoal = async (
 
 export default addSavingsGoal;
 
-// export const updateSavingsGoal = async (
-//   req: RequestWithDecodedIdToken,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { firebaseUid } = req;
-//   const {
-//     currentAmountContributed,
-//     descriptionOfGoal,
-//     nameOfGoal,
-//     targetAmount,
-//   } = req.body;
-//   if (!firebaseUid) {
-//     next(new Error("No firebase uid"));
-//   }
-//   try {
-//     await SavingsGoalModel.findOneAndUpdate(
-//       {
-//         firebaseUserUid: firebaseUid,
-//       },
-//       {
-//         currentAmountContributed,
-//         descriptionOfGoal,
-//         nameOfGoal,
-//         targetAmount,
-//       }
-//     );
-//     res.status(200).send("OK");
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 export const getSavingsGoal = async (
   req: RequestWithDecodedIdToken,
   res: Response,
