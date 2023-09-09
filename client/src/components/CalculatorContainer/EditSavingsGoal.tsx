@@ -26,6 +26,7 @@ export default function EditSavingsGoal({
     handleSubmit,
     reset,
     control,
+    register,
     formState: { errors },
   } = useForm<z.infer<typeof savingsGoalValSchema>>({
     resolver: zodResolver(savingsGoalValSchema),
@@ -39,6 +40,7 @@ export default function EditSavingsGoal({
   const handleFormSubmit = (data: z.infer<typeof savingsGoalValSchema>) => {
     mutate(data);
     reset();
+    onClickCancel();
   };
 
   return (
@@ -70,17 +72,18 @@ export default function EditSavingsGoal({
             : ""
         }
       />
-      <FormInput
-        className="w-full"
-        control={control}
-        inputType="number"
-        inputPlaceholder="Target Amount"
-        name="targetAmount"
-        isError={"targetAmount" in errors}
-        errorMessage={
-          errors?.targetAmount?.message ? errors.targetAmount.message : ""
-        }
-      />
+      <div>
+        <p>Target Amount</p>
+        <input
+          step={0.01}
+          type="number"
+          className={`border-2 border-gray-300 rounded-md p-1 w-min`}
+          {...register("targetAmount", { valueAsNumber: true })}
+        />
+        {"targetAmount" in errors && errors.targetAmount?.message && (
+          <p className="text-red-500">{errors.targetAmount.message}</p>
+        )}
+      </div>
       <div className="flex gap-2">
         <Button label={"Cancel"} onClick={onClickCancel} />
         <Button label={"Submit"} type="submit" />

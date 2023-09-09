@@ -15,58 +15,76 @@ const addSavingsGoal = async (
     nameOfGoal,
     targetAmount,
   } = req.body;
+  console.log("req.body", req.body);
   if (!firebaseUid) {
     next(new Error("No firebase uid"));
   }
   try {
-    await SavingsGoalModel.create({
+    const savingsGoal = await SavingsGoalModel.findOne({
       firebaseUserUid: firebaseUid,
-      currentAmountContributed,
-      descriptionOfGoal,
-      nameOfGoal,
-      targetAmount,
     });
+    if (!savingsGoal) {
+      await SavingsGoalModel.create({
+        firebaseUserUid: firebaseUid,
+        currentAmountContributed,
+        descriptionOfGoal,
+        nameOfGoal,
+        targetAmount,
+      });
+    } else {
+      await SavingsGoalModel.findOneAndUpdate(
+        {
+          firebaseUserUid: firebaseUid,
+        },
+        {
+          currentAmountContributed,
+          descriptionOfGoal,
+          nameOfGoal,
+          targetAmount,
+        }
+      );
+    }
     res.status(200).send("OK");
   } catch (error) {
-    console.log("Error creating savings goal.");
+    console.log("Error creating or updating savings goal.");
     next(error);
   }
 };
 
 export default addSavingsGoal;
 
-export const updateSavingsGoal = async (
-  req: RequestWithDecodedIdToken,
-  res: Response,
-  next: NextFunction
-) => {
-  const { firebaseUid } = req;
-  const {
-    currentAmountContributed,
-    descriptionOfGoal,
-    nameOfGoal,
-    targetAmount,
-  } = req.body;
-  if (!firebaseUid) {
-    next(new Error("No firebase uid"));
-  }
-  try {
-    await SavingsGoalModel.findOneAndUpdate(
-      {
-        firebaseUserUid: firebaseUid,
-      },
-      {
-        currentAmountContributed,
-        descriptionOfGoal,
-        nameOfGoal,
-        targetAmount,
-      }
-    );
-    res.status(200).send("OK");
-  } catch (error) {
-    next(error);
-  }
-};
+// export const updateSavingsGoal = async (
+//   req: RequestWithDecodedIdToken,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const { firebaseUid } = req;
+//   const {
+//     currentAmountContributed,
+//     descriptionOfGoal,
+//     nameOfGoal,
+//     targetAmount,
+//   } = req.body;
+//   if (!firebaseUid) {
+//     next(new Error("No firebase uid"));
+//   }
+//   try {
+//     await SavingsGoalModel.findOneAndUpdate(
+//       {
+//         firebaseUserUid: firebaseUid,
+//       },
+//       {
+//         currentAmountContributed,
+//         descriptionOfGoal,
+//         nameOfGoal,
+//         targetAmount,
+//       }
+//     );
+//     res.status(200).send("OK");
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 export const getSavingsGoal = async (
   req: RequestWithDecodedIdToken,
