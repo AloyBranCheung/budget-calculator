@@ -26,7 +26,7 @@ const addSavingsGoal = async (
     if (!savingsGoal) {
       await SavingsGoalModel.create({
         firebaseUserUid: firebaseUid,
-        currentAmountContributed,
+        currentAmountContributed: 0,
         descriptionOfGoal,
         nameOfGoal,
         targetAmount,
