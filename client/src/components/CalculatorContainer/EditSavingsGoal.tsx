@@ -5,6 +5,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { savingsGoalValSchema } from "../../validators/addSavingsGoalValidationSchema";
+// react-query
+import useMutationAddSavingsGoal from "../../react-query/queryHooks/useMutationAddSavingsGoal";
 // components
 import FormInput from "../UI/form/FormInput";
 import { SavingsGoalSchema } from "../../@types/savingsGoal";
@@ -19,6 +21,7 @@ export default function EditSavingsGoal({
   savingsGoalData,
   onClickCancel,
 }: EditSavingsGoalProps) {
+  const { mutate } = useMutationAddSavingsGoal();
   const {
     handleSubmit,
     reset,
@@ -34,7 +37,7 @@ export default function EditSavingsGoal({
   });
 
   const handleFormSubmit = (data: z.infer<typeof savingsGoalValSchema>) => {
-    console.log({ data });
+    mutate(data);
     reset();
   };
 
