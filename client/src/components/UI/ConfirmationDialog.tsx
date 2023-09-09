@@ -29,8 +29,8 @@ export default function ConfirmationDialog({
   }, [isOpen]);
 
   return (
-    <dialog ref={dialogRef} open={isOpen}>
-      <div className="flex flex-col gap-5">
+    <dialog ref={dialogRef} open={isOpen} className="rounded-2xl">
+      <div className="flex flex-col gap-5 p-2">
         {children}
         <div className="flex gap-5 justify-end">
           <button

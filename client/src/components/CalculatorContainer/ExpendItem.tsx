@@ -45,14 +45,17 @@ export default function ExpendItem({
         </>
       </ConfirmationDialog>
 
-      <div
-        className="w-5 h-5 self-end cursor-pointer"
-        onClick={() => setIsConfirm(true)}
-      >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/5368/5368396.png"
-          alt="delete"
-        />
+      <div className="flex items-center justify-between">
+        <div>{dayjs(item.date).format("YYYY-MM-DD")}</div>
+        <div
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => setIsConfirm(true)}
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5368/5368396.png"
+            alt="delete"
+          />
+        </div>
       </div>
       <TitleText
         bold
