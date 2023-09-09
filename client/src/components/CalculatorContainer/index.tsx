@@ -12,11 +12,12 @@ export default function Calculator() {
   const { data: savingsGoalData, isLoading: savingsGoalIsLoading } =
     useGetSavingsGoal();
 
-  console.log({ savingsGoalData });
-
   return (
     <div className="flex flex-col gap-5">
-      <SavingsGoal />
+      <SavingsGoal
+        savingsGoalData={savingsGoalData}
+        savingsGoalIsLoading={savingsGoalIsLoading}
+      />
       <AddExpenditure />
       <CurrBudgetDisplay isLoading={isLoading} budgetData={budgetData} />
       <Spendables isLoading={isLoading} budgetData={budgetData} />

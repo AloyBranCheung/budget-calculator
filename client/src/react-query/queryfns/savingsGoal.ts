@@ -1,8 +1,8 @@
 import backendServer from "../../utils/backendServer";
 
 export const getSavingsGoal = async () => {
-  console.log("getSavingsGoal");
-  return null;
+  const response = await backendServer.get("/savings-goal");
+  return response.data;
 };
 
 export const addSavingsGoal = async () => {

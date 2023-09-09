@@ -7,8 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { savingsGoalValSchema } from "../../validators/addSavingsGoalValidationSchema";
 // components
 import FormInput from "../UI/form/FormInput";
+import { SavingsGoalSchema } from "../../@types/savingsGoal";
 
-export default function EditSavingsGoal() {
+interface EditSavingsGoalProps {
+  savingsGoalData: SavingsGoalSchema | undefined;
+}
+
+export default function EditSavingsGoal({
+  savingsGoalData,
+}: EditSavingsGoalProps) {
   const {
     handleSubmit,
     reset,
