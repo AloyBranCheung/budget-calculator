@@ -18,7 +18,7 @@ export default function Button({
       type={type}
       data-te-ripple-init
       data-te-ripple-color="light"
-      className={`border-solid border-2 border-black rounded-2xl px-2 py-1 hover:bg-gray-200 ${className}`}
+      className={`border-solid border-2 border-black rounded-2xl px-2 hover:bg-gray-200 ${className}`}
       onClick={onClick}
     >
       {label}
