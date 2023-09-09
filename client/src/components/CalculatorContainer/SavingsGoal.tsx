@@ -57,7 +57,11 @@ export default function SavingsGoal({
           <Button label="Contribute" onClick={() => setIsContribute(true)} />
         )}
       </div>
-      {isEdit ? (
+      {savingsGoalIsLoading ? (
+        <div className="w-full flex items-center justify-center">
+          <div>Loading...</div>
+        </div>
+      ) : isEdit ? (
         <EditSavingsGoal
           onClickCancel={handleClickCancel}
           savingsGoalData={savingsGoalData}
