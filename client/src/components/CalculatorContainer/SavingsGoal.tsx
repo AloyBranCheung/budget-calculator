@@ -13,6 +13,7 @@ import SectionTitle from "../UI/typography/SectionTitle";
 import Button from "../UI/Button";
 import EditSavingsGoal from "./EditSavingsGoal";
 import FormSubmit from "../UI/form/FormSubmit";
+import TitleText from "../UI/typography/TitleText";
 
 interface SavingsGoalProps {
   savingsGoalData: SavingsGoalSchema | undefined;
@@ -62,7 +63,10 @@ export default function SavingsGoal({
         />
       ) : (
         <div className="flex w-full flex-col items-center justify-center gap-2">
-          <div>{savingsGoalData?.nameOfGoal ?? "Please add a goal"}</div>
+          <TitleText
+            title={savingsGoalData?.nameOfGoal ?? "Please add a goal"}
+            bold
+          />
           <div>
             {savingsGoalData?.currentAmountContributed ??
               "No amount contributed yet."}{" "}
