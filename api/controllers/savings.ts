@@ -67,3 +67,26 @@ export const updateSavingsGoal = async (
     next(error);
   }
 };
+
+export const getSavingsGoal = async (
+  req: RequestWithDecodedIdToken,
+  res: Response,
+  next: NextFunction
+) => {
+  const { firebaseUid } = req;
+  if (!firebaseUid) {
+    next(new Error("No firebase uid"));
+  }
+  try {
+    const savingsGoal = await SavingsGoalModel.findOne({
+      firebaseUserUid: firebaseUid,
+    });
+    if (savingsGoal) {
+      res.status(200).send(savingsGoal);
+    } else {
+      res.status(200).send({ message: "Not found" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
