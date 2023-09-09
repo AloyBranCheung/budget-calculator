@@ -17,6 +17,8 @@ export default function SavingsGoal({
 }: SavingsGoalProps) {
   const [isEdit, setIsEdit] = useState(false);
 
+  const handleClickCancel = () => setIsEdit(false);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -24,7 +26,10 @@ export default function SavingsGoal({
         <Button label="Edit" onClick={() => setIsEdit(true)} />
       </div>
       {isEdit ? (
-        <EditSavingsGoal savingsGoalData={savingsGoalData} />
+        <EditSavingsGoal
+          onClickCancel={handleClickCancel}
+          savingsGoalData={savingsGoalData}
+        />
       ) : (
         <div className="flex w-full flex-col items-center justify-center gap-2">
           <div>{savingsGoalData?.nameOfGoal ?? "Please add a goal"}</div>

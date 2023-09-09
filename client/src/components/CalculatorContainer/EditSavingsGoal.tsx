@@ -8,13 +8,16 @@ import { savingsGoalValSchema } from "../../validators/addSavingsGoalValidationS
 // components
 import FormInput from "../UI/form/FormInput";
 import { SavingsGoalSchema } from "../../@types/savingsGoal";
+import Button from "../UI/Button";
 
 interface EditSavingsGoalProps {
   savingsGoalData: SavingsGoalSchema | undefined;
+  onClickCancel: () => void;
 }
 
 export default function EditSavingsGoal({
   savingsGoalData,
+  onClickCancel,
 }: EditSavingsGoalProps) {
   const {
     handleSubmit,
@@ -23,10 +26,23 @@ export default function EditSavingsGoal({
     formState: { errors },
   } = useForm<z.infer<typeof savingsGoalValSchema>>({
     resolver: zodResolver(savingsGoalValSchema),
+    defaultValues: {
+      nameOfGoal: savingsGoalData?.nameOfGoal ?? "",
+      descriptionOfGoal: savingsGoalData?.descriptionOfGoal ?? "",
+      targetAmount: savingsGoalData?.targetAmount ?? 0,
+    },
   });
 
+  const handleFormSubmit = (data: z.infer<typeof savingsGoalValSchema>) => {
+    console.log({ data });
+    reset();
+  };
+
   return (
-    <div>
+    <form
+      className="flex flex-col gap-2"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       <FormInput
         className="w-full"
         control={control}
@@ -38,6 +54,34 @@ export default function EditSavingsGoal({
           errors?.nameOfGoal?.message ? errors.nameOfGoal.message : ""
         }
       />
-    </div>
+      <FormInput
+        className="w-full"
+        control={control}
+        inputType="text"
+        inputPlaceholder="Description of Goal"
+        name="descriptionOfGoal"
+        isError={"descriptionOfGoal" in errors}
+        errorMessage={
+          errors?.descriptionOfGoal?.message
+            ? errors.descriptionOfGoal.message
+            : ""
+        }
+      />
+      <FormInput
+        className="w-full"
+        control={control}
+        inputType="number"
+        inputPlaceholder="Target Amount"
+        name="targetAmount"
+        isError={"targetAmount" in errors}
+        errorMessage={
+          errors?.targetAmount?.message ? errors.targetAmount.message : ""
+        }
+      />
+      <div className="flex gap-2">
+        <Button label={"Cancel"} onClick={onClickCancel} />
+        <Button label={"Submit"} type="submit" />
+      </div>
+    </form>
   );
 }
