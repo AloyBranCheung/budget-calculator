@@ -14,6 +14,7 @@ import Button from "../UI/Button";
 import EditSavingsGoal from "./EditSavingsGoal";
 import FormSubmit from "../UI/form/FormSubmit";
 import TitleText from "../UI/typography/TitleText";
+import { savingsColor } from "../../utils/colorCode";
 
 interface SavingsGoalProps {
   savingsGoalData: SavingsGoalSchema | undefined;
@@ -67,11 +68,26 @@ export default function SavingsGoal({
             title={savingsGoalData?.nameOfGoal ?? "Please add a goal"}
             bold
           />
-          <div>
-            {savingsGoalData?.currentAmountContributed ??
-              "No amount contributed yet."}{" "}
-            ({savingsGoalData?.targetAmount ?? "No target amount specified."})
-          </div>
+          <TitleText
+            className={
+              savingsGoalData?.currentAmountContributed &&
+              savingsGoalData?.targetAmount
+                ? savingsColor(
+                    savingsGoalData.currentAmountContributed,
+                    savingsGoalData.targetAmount
+                  )
+                : undefined
+            }
+            title={`${
+              savingsGoalData?.currentAmountContributed
+                ? `$${savingsGoalData.currentAmountContributed}`
+                : "No amount contributed yet."
+            } (${
+              savingsGoalData?.targetAmount
+                ? `$${savingsGoalData.targetAmount}`
+                : "No target amount specified."
+            })`}
+          />
           <div className="self-start">
             {savingsGoalData?.descriptionOfGoal ?? "No description set yet."}
           </div>
