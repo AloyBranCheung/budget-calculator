@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { queryKeys } from "../keys/keys";
 import { queryClient } from "../../main";

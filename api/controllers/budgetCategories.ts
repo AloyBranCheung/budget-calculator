@@ -1,9 +1,9 @@
-import { NextFunction, Response } from "express";
+import { type NextFunction, type Response } from "express";
 // models
 import BudgetDataModel from "../models/BudgetDataModel";
 // types
-import { AddExpenditureRequest } from "../@types/addExpenditure";
-import { RequestWithDecodedIdToken } from "../middleware/withAuth";
+import { type AddExpenditureRequest } from "../@types/addExpenditure";
+import { type RequestWithDecodedIdToken } from "../middleware/withAuth";
 
 export const updateBudgetCategories = async (
   req: RequestWithDecodedIdToken,
@@ -28,7 +28,7 @@ export const updateBudgetCategories = async (
       },
       { new: true }
     );
-    if (newModel) {
+    if (newModel != null) {
       next();
     } else {
       res.status(500).send("Error updating budget categories");
@@ -47,7 +47,7 @@ export const deleteExpenditure = async (
   const category = req.params.category;
   const expenditureId = req.params.expenditureId;
 
-  if (!firebaseUid || !expenditureId) {
+  if (!(firebaseUid ?? "") || !(expenditureId ?? "")) {
     console.error(
       "Invalid firebaseUid or expenditureId at deleteExpenditure controller"
     );

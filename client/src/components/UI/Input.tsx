@@ -1,4 +1,5 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface InputProps {
   value: string | number;
@@ -35,7 +36,10 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`border-2 border-gray-300 rounded-md p-1 ${className}`}
+        className={twMerge(
+          "border-2 border-gray-300 rounded-md p-1",
+          className
+        )}
         step={step}
         min={min}
       />

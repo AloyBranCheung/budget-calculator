@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import SavingsGoalSchema from "../schemas/savingsGoalSchema";
-import { SavingsGoal } from "../@types/savingsGoal";
+import { type SavingsGoal } from "../@types/savingsGoal";
 
 const SavingsGoalModel = mongoose.model<SavingsGoal>(
   "SavingsGoal",

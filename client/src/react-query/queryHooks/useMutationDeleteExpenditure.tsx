@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import deleteExpenditure from "../queryfns/expenditure";
 import toastMessage, { ToastMessageType } from "../../utils/toastMessages";

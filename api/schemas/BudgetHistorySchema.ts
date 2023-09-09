@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import BudgetDataSchema from "./budgetDataSchema";
-import { BudgetHistoryApiResponse } from "../@types/budgetHistory";
+import { type BudgetHistoryApiResponse } from "../@types/budgetHistory";
 
 const BudgetHistorySchema = new Schema<BudgetHistoryApiResponse>(
   {
