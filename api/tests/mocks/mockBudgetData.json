@@ -1,0 +1,48 @@
+{
+  "_id": "64fb0f9d95ed334870420381",
+  "firebaseUserUid": "test-uid",
+  "createdAt": "2023-09-08T12:12:13.764Z",
+  "updatedAt": "2023-09-10T12:38:33.914Z",
+  "__v": 7,
+  "categories": {
+    "needs": [],
+    "wants": [],
+    "savings": [],
+    "_id": "64fc56da2a07c5e2c107f058",
+    "createdAt": "2023-09-09T11:28:26.382Z",
+    "updatedAt": "2023-09-10T12:38:33.912Z"
+  },
+  "current": {
+    "budget": {
+      "total": 2500,
+      "remaining": 2500,
+      "_id": "64fc56da2a07c5e2c107f054",
+      "createdAt": "2023-09-09T11:28:26.382Z",
+      "updatedAt": "2023-09-10T12:38:33.913Z"
+    },
+    "needs": {
+      "total": 1250,
+      "remaining": 1250,
+      "_id": "64fc56da2a07c5e2c107f055",
+      "createdAt": "2023-09-09T11:28:26.382Z",
+      "updatedAt": "2023-09-10T12:38:33.913Z"
+    },
+    "wants": {
+      "total": 750,
+      "remaining": 750,
+      "_id": "64fc56da2a07c5e2c107f056",
+      "createdAt": "2023-09-09T11:28:26.382Z",
+      "updatedAt": "2023-09-09T11:28:26.382Z"
+    },
+    "savings": {
+      "total": 500,
+      "remaining": 500,
+      "_id": "64fc56da2a07c5e2c107f057",
+      "createdAt": "2023-09-09T11:28:26.382Z",
+      "updatedAt": "2023-09-09T11:28:26.382Z"
+    },
+    "_id": "64fc56da2a07c5e2c107f053",
+    "createdAt": "2023-09-09T11:28:26.382Z",
+    "updatedAt": "2023-09-10T12:38:33.913Z"
+  }
+}

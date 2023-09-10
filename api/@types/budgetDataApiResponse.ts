@@ -1,51 +1,51 @@
 export interface Tags {
-  id: string
-  color: string
-  tagCategory: string
-  backgroundColor: string
+  id: string;
+  color: string;
+  tagCategory: string;
+  backgroundColor: string;
 }
 
 export interface CategoryItems {
-  id: string
-  amount: number
-  date: Date
-  description: string
-  categories: Tags[] // tags
+  id: string;
+  amount: number;
+  date: Date;
+  description: string;
+  categories: Tags[]; // tags
 }
 
 export enum BudgetCategory {
   Budget = "budget",
   Needs = "needs",
   Wants = "wants",
-  Savings = "savings"
+  Savings = "savings",
 }
 
 export interface CurrentBudgets {
   budget: {
-    total: number
-    remaining: number
-  }
+    total: number;
+    remaining: number;
+  };
   [BudgetCategory.Needs]: {
-    total: number
-    remaining: number
-  }
+    total: number;
+    remaining: number;
+  };
   [BudgetCategory.Wants]: {
-    total: number
-    remaining: number
-  }
+    total: number;
+    remaining: number;
+  };
   [BudgetCategory.Savings]: {
-    total: number
-    remaining: number
-  }
-  createdAt: Date
+    total: number;
+    remaining: number;
+  };
+  createdAt: Date;
 }
 
 export interface BudgetDataAPIResponse {
-  firebaseUserUid: string
-  current: CurrentBudgets
+  firebaseUserUid: string;
+  current: CurrentBudgets;
   categories: {
-    [BudgetCategory.Needs]: CategoryItems[]
-    [BudgetCategory.Wants]: CategoryItems[]
-    [BudgetCategory.Savings]: CategoryItems[]
-  }
+    [BudgetCategory.Needs]: CategoryItems[];
+    [BudgetCategory.Wants]: CategoryItems[];
+    [BudgetCategory.Savings]: CategoryItems[];
+  };
 }

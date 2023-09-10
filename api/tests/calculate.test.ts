@@ -1,8 +1,4 @@
-// import request from "supertest";
-// import app from "../server";
-// import recalculateCurrTotal from "../middleware/calculateAndUpdateAllFields";
 import calculateCurrSpendables from "../utils/calculateSpendables";
-// import { AddExpenditureRequest } from "../@types/addExpenditure";
 
 describe("test calculations", () => {
   it("should calculate new spendables with new total amount", async () => {
