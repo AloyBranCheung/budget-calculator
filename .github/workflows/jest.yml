@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main, master]
 jobs:
-  Jest_Tests:
+  Client_Jest:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,3 +21,34 @@ jobs:
         run: yarn build
       - name: Test
         run: yarn jest ./__tests__
+
+  Api_Jest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test
+        run: yarn jest
+        env:
+          PORT: 3001
+          NODE_ENV: "test"
+          # Firebase
+          FIREBASE_TYPE: ${{secrets.FIREBASE_TYPE}}
+          FIREBASE_PROJECT_ID: ${{secrets.FIREBASE_PROJECT_ID}}
+          FIREBASE_PRIVATE_KEY_ID: ${{secrets.FIREBASE_PRIVATE_KEY_ID}}
+          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
+          FIREBASE_CLIENT_EMAIL: ${{secrets.FIREBASE_CLIENT_EMAIL}}
+          FIREBASE_CLIENT_ID: ${{secrets.FIREBASE_CLIENT_ID}}
+          FIREBASE_AUTH_URI: ${{secrets.FIREBASE_AUTH_URI}}
+          FIREBASE_TOKEN_URI: ${{secrets.FIREBASE_TOKEN_URI}}
+          FIREBASE_AUTH_PROVIDER_X509_CERT_URL: ${{secrets.FIREBASE_AUTH_PROVIDER_X509_CERT_URL}}
+          FIREBASE_CLIENT_X509_CERT_URL: ${{secrets.FIREBASE_CLIENT_X509_CERT_URL}}
+          # MongoDB
+          MONGODB_URL: ${{secrets.MONGODB_URL}}

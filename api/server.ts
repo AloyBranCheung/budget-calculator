@@ -28,10 +28,16 @@ app.get("/", (req, res) => {
 // Error middleware handler
 app.use(errorMiddleware);
 
-app.listen(port, async () => {
-  await connectMongoose();
-  if (auth) {
-    console.log("Firebase auth is initialized");
-  }
-  console.log(`Server is running on port ${port}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, async () => {
+    await connectMongoose();
+    if (auth) {
+      console.log("Firebase auth is initialized");
+    }
+    console.log(`Server is running on port ${port}`);
+  });
+} else {
+  console.log("Server not up, in test mode: NODE_ENV = 'test'");
+}
+
+export default app;
