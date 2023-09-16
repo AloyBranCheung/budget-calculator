@@ -1,3 +1,5 @@
+import type CreditOrDebit from "./creditOrDebit";
+
 export interface Tags {
   id: string;
   color: string;
@@ -10,6 +12,7 @@ export interface CategoryItems {
   amount: number;
   date: Date;
   description: string;
+  creditOrDebit: CreditOrDebit;
   categories: Tags[]; // tags
 }
 

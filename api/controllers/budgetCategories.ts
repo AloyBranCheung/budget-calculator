@@ -32,6 +32,7 @@ export const updateBudgetCategories = async (
             amount: addExpenditureBody.amount,
             date: addExpenditureBody.date,
             description: addExpenditureBody.description,
+            creditOrDebit: addExpenditureBody.creditOrDebit,
           },
         },
       },
