@@ -14,6 +14,7 @@ export default getBudgetData;
 export const updateBudgetData = async (totalStartingAmount: number) => {
   const response = await backendServer.put<BudgetDataAPIResponse>("/data", {
     totalStartingAmount,
+    creditOrDebit: "credit",
   });
 
   return response.data;

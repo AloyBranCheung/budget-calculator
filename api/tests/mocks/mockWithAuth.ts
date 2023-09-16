@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { type DecodedIdToken } from "firebase-admin/auth";
-import { mockUid } from "./constants";
+import { mockUid } from "../utils/constants";
 
 const mockWithAuth = jest.fn(
   (req: Request, res: Response, next: NextFunction) => {

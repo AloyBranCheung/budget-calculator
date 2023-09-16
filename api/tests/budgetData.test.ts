@@ -1,5 +1,5 @@
 import mockBudgetDataJSON from "./mocks/mockBudgetData.json";
-import mockWithAuth from "./utils/mockWithAuth";
+import mockWithAuth from "./mocks/mockWithAuth";
 import request from "supertest";
 import app from "../server";
 import { mockValidToken } from "./utils/constants";
