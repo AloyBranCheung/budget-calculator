@@ -2,7 +2,7 @@ import SectionTitle from "../UI/typography/SectionTitle";
 import { BudgetCategory } from "../../@types/budgetData";
 import FormInput from "../UI/form/FormInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Button from "../UI/Button";
 import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 import { z } from "zod";
@@ -13,6 +13,7 @@ const defaultValues: z.infer<typeof addExpenditureValidationSchema> = {
   amount: 0,
   description: "",
   date: new Date(),
+  creditOrDebit: "debit",
 };
 
 export default function AddExpenditure() {
@@ -84,6 +85,26 @@ export default function AddExpenditure() {
               {"amount" in errors && errors.amount?.message && (
                 <p className="text-red-500">{errors.amount.message}</p>
               )}
+            </div>
+            <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
+                <input
+                  type="radio"
+                  id="debit"
+                  {...register("creditOrDebit")}
+                  value="debit"
+                />
+                <label htmlFor="debit">Debit</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <input
+                  {...register("creditOrDebit")}
+                  type="radio"
+                  id="credit"
+                  value="credit"
+                />
+                <label htmlFor="credit">Credit</label>
+              </div>
             </div>
 
             <div className="flex gap-5">
