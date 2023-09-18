@@ -2,18 +2,19 @@ import SectionTitle from "../UI/typography/SectionTitle";
 import { BudgetCategory } from "../../@types/budgetData";
 import FormInput from "../UI/form/FormInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Button from "../UI/Button";
 import addExpenditureValidationSchema from "../../validators/addExpenditureValidationSchema";
 import { z } from "zod";
 import useMutationUpdateBudgetCategories from "../../react-query/queryHooks/useMutationUpdateBudgetCategories";
+import CreditOrDebit from "../../@types/creditOrDebit";
 
 const defaultValues: z.infer<typeof addExpenditureValidationSchema> = {
   category: "",
   amount: 0,
   description: "",
   date: new Date(),
-  creditOrDebit: "debit",
+  creditOrDebit: CreditOrDebit.Debit,
 };
 
 export default function AddExpenditure() {

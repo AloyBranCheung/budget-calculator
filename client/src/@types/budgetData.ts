@@ -1,3 +1,5 @@
+import CreditOrDebit from "./creditOrDebit";
+
 export interface Tags {
   id: string;
   color: string;
@@ -11,6 +13,7 @@ export interface CategoryItems {
   date: Date;
   description: string;
   categories: Tags[]; // tags
+  creditOrDebit: CreditOrDebit;
 }
 
 export enum BudgetCategory {

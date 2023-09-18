@@ -1,3 +1,9 @@
+import CreditOrDebit from "../@types/creditOrDebit";
+
+const green = "bg-green-200";
+const yellow = "bg-yellow-200";
+const red = "bg-red-200";
+
 const colorCode = (remaining: number, total: number) => {
   const percentage = (remaining / total) * 100;
 
@@ -5,13 +11,13 @@ const colorCode = (remaining: number, total: number) => {
     return "";
   }
   if (percentage >= 50) {
-    return "bg-green-200";
+    return green;
   }
   if (percentage >= 30 && percentage < 50) {
-    return "bg-yellow-200";
+    return yellow;
   }
   if (percentage < 30) {
-    return "bg-red-200";
+    return red;
   }
   return "";
 };
@@ -25,13 +31,24 @@ export const savingsColor = (totalContributed: number, totalGoal: number) => {
     return "";
   }
   if (percentage >= 80) {
-    return "bg-green-200";
+    return green;
   }
   if (percentage >= 40 && percentage < 80) {
-    return "bg-yellow-200";
+    return yellow;
   }
   if (percentage < 40) {
-    return "bg-red-200";
+    return red;
   }
   return "";
+};
+
+export const creditDebitColor = (creditOrDebit: CreditOrDebit) => {
+  switch (creditOrDebit) {
+    case CreditOrDebit.Credit:
+      return green;
+    case CreditOrDebit.Debit:
+      return red;
+    default:
+      return red;
+  }
 };
