@@ -6,7 +6,7 @@ export const testWithLogin = base.extend({
     // arrange
     const emailField = await page.getByPlaceholder("Email");
     const passwordField = await page.getByPlaceholder("Password");
-    const heading = await page.getByRole("heading", { name: "SimpleyBudgets" });
+    const heading = await page.getByRole("heading", { name: "SimplyBudgets" });
     const loginText = await page.getByText("Login").first();
     // expect
     expect(heading);
