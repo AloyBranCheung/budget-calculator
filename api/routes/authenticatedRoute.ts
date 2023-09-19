@@ -16,10 +16,12 @@ import {
 } from "../controllers/budgetCategories";
 // middleware
 import recalculateCurrTotal from "../middleware/calculateAndUpdateAllFields";
+import validCreditOrDebit from "../middleware/validCreditOrDebit";
 
 const router = express.Router();
 
 router.use(withAuth);
+router.use(validCreditOrDebit);
 
 // budget data
 router.get("/data", getBudgetData);

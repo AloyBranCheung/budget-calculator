@@ -1,12 +1,17 @@
 import mongoose from "mongoose";
 import { BudgetCategory } from "../@types/BudgetData";
 import { type BudgetDataAPIResponse } from "../@types/budgetDataApiResponse";
+import CreditOrDebit from "../@types/creditOrDebit";
 
 const CategorySchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
   amount: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
   description: { type: String, default: "" },
+  creditOrDebit: {
+    type: String,
+    enum: [CreditOrDebit.Credit, CreditOrDebit.Debit],
+  },
   categories: [
     {
       id: mongoose.Schema.Types.ObjectId,

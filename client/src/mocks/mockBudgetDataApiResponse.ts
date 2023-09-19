@@ -1,4 +1,5 @@
 import { BudgetDataAPIResponse, BudgetCategory } from "../@types/budgetData";
+import CreditOrDebit from "../@types/creditOrDebit";
 
 const MOCK_BUDGET_DATA_API_RESPONSE: (
   STARTING_AMOUNT?: number,
@@ -34,6 +35,7 @@ const MOCK_BUDGET_DATA_API_RESPONSE: (
         date: new Date(),
         description: "asdfasdf",
         categories: [],
+        creditOrDebit: CreditOrDebit.Debit,
       },
     ],
     [BudgetCategory.Wants]: [
@@ -43,6 +45,7 @@ const MOCK_BUDGET_DATA_API_RESPONSE: (
         date: new Date(),
         description: "asdfasdf",
         categories: [],
+        creditOrDebit: CreditOrDebit.Debit,
       },
     ],
     [BudgetCategory.Savings]: [
@@ -52,6 +55,7 @@ const MOCK_BUDGET_DATA_API_RESPONSE: (
         date: new Date(),
         description: "asdfasdf",
         categories: [],
+        creditOrDebit: CreditOrDebit.Debit,
       },
     ],
   },

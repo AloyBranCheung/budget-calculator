@@ -14,6 +14,7 @@ const addExpenditureValidationSchema = z
     amount: z.number().positive().multipleOf(0.01),
     description: z.string().nonempty({ message: "Can't be empty." }),
     date: z.date().default(new Date()),
+    creditOrDebit: z.enum(["credit", "debit"]).default("debit"),
   })
   .required();
 

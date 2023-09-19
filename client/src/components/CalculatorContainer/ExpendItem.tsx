@@ -3,6 +3,7 @@ import TitleText from "../UI/typography/TitleText";
 import { CategoryItems } from "../../@types/budgetData";
 import dayjs from "dayjs";
 import ConfirmationDialog from "../UI/ConfirmationDialog";
+import { creditDebitColor } from "../../utils/colorCode";
 
 interface ExpendItemProps {
   item: CategoryItems;
@@ -59,7 +60,7 @@ export default function ExpendItem({
       </div>
       <TitleText
         bold
-        className="text-4xl bg-red-200"
+        className={`text-4xl ${creditDebitColor(item.creditOrDebit)}`}
         title={`$ ${item.amount.toFixed(2)}`}
       />
       <div>

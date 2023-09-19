@@ -4,6 +4,7 @@ import BudgetDataModel from "../models/BudgetDataModel";
 // types
 import { BudgetCategory } from "../@types/budgetDataApiResponse";
 import { type RequestWithDecodedIdToken } from "./withAuth";
+import CreditOrDebit from "../@types/creditOrDebit";
 
 const recalculateCurrTotal = async (
   req: RequestWithDecodedIdToken,
@@ -23,16 +24,42 @@ const recalculateCurrTotal = async (
         currDocument.current.savings.total;
 
       currDocument.categories[BudgetCategory.Needs].forEach((category) => {
-        currDocument.current.budget.remaining -= category.amount;
-        currDocument.current.needs.remaining -= category.amount;
+        if (
+          !category?.creditOrDebit ||
+          category.creditOrDebit === CreditOrDebit.Debit
+        ) {
+          currDocument.current.budget.remaining -= category.amount;
+          currDocument.current.needs.remaining -= category.amount;
+        } else {
+          currDocument.current.budget.remaining += category.amount;
+          currDocument.current.needs.remaining += category.amount;
+        }
       });
+
       currDocument.categories[BudgetCategory.Wants].forEach((category) => {
-        currDocument.current.budget.remaining -= category.amount;
-        currDocument.current.wants.remaining -= category.amount;
+        if (
+          !category?.creditOrDebit ||
+          category.creditOrDebit === CreditOrDebit.Debit
+        ) {
+          currDocument.current.budget.remaining -= category.amount;
+          currDocument.current.wants.remaining -= category.amount;
+        } else {
+          currDocument.current.budget.remaining += category.amount;
+          currDocument.current.wants.remaining += category.amount;
+        }
       });
+
       currDocument.categories[BudgetCategory.Savings].forEach((category) => {
-        currDocument.current.budget.remaining -= category.amount;
-        currDocument.current.savings.remaining -= category.amount;
+        if (
+          !category?.creditOrDebit ||
+          category.creditOrDebit === CreditOrDebit.Debit
+        ) {
+          currDocument.current.budget.remaining -= category.amount;
+          currDocument.current.savings.remaining -= category.amount;
+        } else {
+          currDocument.current.budget.remaining += category.amount;
+          currDocument.current.savings.remaining += category.amount;
+        }
       });
 
       // sort arrays by date (most recent first)

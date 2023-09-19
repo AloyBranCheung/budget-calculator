@@ -13,6 +13,15 @@ export const updateBudgetCategories = async (
   const addExpenditureBody: AddExpenditureRequest = req.body;
   const { firebaseUid } = req;
   try {
+    // check if current budget exists
+    const currBudget = await BudgetDataModel.findOne({
+      firebaseUserUid: firebaseUid,
+    });
+    if (!currBudget?.current) {
+      throw new Error("Current budget does not exist, cannot update.");
+    }
+
+    // update current budget
     const newModel = await BudgetDataModel.findOneAndUpdate(
       {
         firebaseUserUid: firebaseUid,
@@ -23,11 +32,13 @@ export const updateBudgetCategories = async (
             amount: addExpenditureBody.amount,
             date: addExpenditureBody.date,
             description: addExpenditureBody.description,
+            creditOrDebit: addExpenditureBody.creditOrDebit,
           },
         },
       },
       { new: true }
     );
+
     if (newModel != null) {
       next();
     } else {
