@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { savingsGoalValSchema } from "../../validators/addSavingsGoalValidationSchema";
 // react-query
 import useMutationAddSavingsGoal from "../../react-query/queryHooks/useMutationAddSavingsGoal";
+// types/utils
+import CreditOrDebit from "../../@types/creditOrDebit";
 // components
 import FormInput from "../UI/form/FormInput";
 import { SavingsGoalSchema } from "../../@types/savingsGoal";
@@ -34,6 +36,7 @@ export default function EditSavingsGoal({
       nameOfGoal: savingsGoalData?.nameOfGoal ?? "",
       descriptionOfGoal: savingsGoalData?.descriptionOfGoal ?? "",
       targetAmount: savingsGoalData?.targetAmount ?? 0,
+      creditOrDebit: CreditOrDebit.Credit,
     },
   });
 
