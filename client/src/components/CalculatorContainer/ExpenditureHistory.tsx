@@ -41,7 +41,11 @@ export default function ExpenditureHistory({
   return (
     <div>
       <SectionTitle className="mb-2" bold title="Expenditures" />
-      <div className="flex flex-col gap-5">{expenditures}</div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="flex flex-col gap-5">{expenditures}</div>
+      )}
     </div>
   );
 }

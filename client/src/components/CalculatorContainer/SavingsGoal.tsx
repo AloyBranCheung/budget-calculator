@@ -86,7 +86,7 @@ export default function SavingsGoal({
             }
             title={`${
               savingsGoalData?.currentAmountContributed
-                ? `$${savingsGoalData.currentAmountContributed}`
+                ? `$${savingsGoalData.currentAmountContributed.toFixed(2)}`
                 : "No amount contributed yet."
             } (${
               savingsGoalData?.targetAmount
