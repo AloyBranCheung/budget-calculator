@@ -8,6 +8,7 @@ import { SavingsGoalSchema } from "../../@types/savingsGoal";
 import { z } from "zod";
 import { contributeValSchema } from "../../validators/addSavingsGoalValidationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import CreditOrDebit from "../../@types/creditOrDebit";
 // components
 import SectionTitle from "../UI/typography/SectionTitle";
 import Button from "../UI/Button";
@@ -35,6 +36,7 @@ export default function SavingsGoal({
     resolver: zodResolver(contributeValSchema),
     defaultValues: {
       contributingAmount: 0,
+      creditOrDebit: CreditOrDebit.Credit,
     },
   });
   const [isEdit, setIsEdit] = useState(false);
@@ -84,7 +86,7 @@ export default function SavingsGoal({
             }
             title={`${
               savingsGoalData?.currentAmountContributed
-                ? `$${savingsGoalData.currentAmountContributed}`
+                ? `$${savingsGoalData.currentAmountContributed.toFixed(2)}`
                 : "No amount contributed yet."
             } (${
               savingsGoalData?.targetAmount

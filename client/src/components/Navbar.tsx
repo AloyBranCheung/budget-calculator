@@ -21,7 +21,7 @@ export default function Navbar() {
     <div className="flex justify-between items-center">
       <PageTitle title="SimplyBudgets" />
       <div className="flex items-center gap-2">
-        {isConfirmation ? (
+        {process.env.NODE_ENV === "prd" ? undefined : isConfirmation ? (
           <Confirmation onClickNo={handleClickNo} onClickYes={handleClickYes} />
         ) : (
           <Button onClick={() => setIsConfirmation(true)} label="Reset" />

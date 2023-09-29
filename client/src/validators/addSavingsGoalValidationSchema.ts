@@ -1,4 +1,5 @@
 import { z } from "zod";
+import CreditOrDebit from "../@types/creditOrDebit";
 
 export const savingsGoalValSchema = z.object({
   nameOfGoal: z
@@ -11,6 +12,7 @@ export const savingsGoalValSchema = z.object({
     .number()
     .positive({ message: "Please enter a positive number" })
     .min(1, { message: "At least 1 dollar." }),
+  creditOrDebit: z.enum([CreditOrDebit.Credit, CreditOrDebit.Debit]),
 });
 
 export const contributeValSchema = z.object({
@@ -18,4 +20,5 @@ export const contributeValSchema = z.object({
     .number()
     .positive({ message: "Please enter a positive number" })
     .min(1, { message: "At least 1 dollar." }),
+  creditOrDebit: z.enum([CreditOrDebit.Credit, CreditOrDebit.Debit]),
 });
