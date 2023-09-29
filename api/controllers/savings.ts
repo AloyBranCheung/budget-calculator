@@ -2,6 +2,7 @@ import { type NextFunction, type Response } from "express";
 import { type RequestWithDecodedIdToken } from "../middleware/withAuth";
 // models
 import SavingsGoalModel from "../models/SavingsGoalModel";
+import SavingsGoalHistoryModel from "../models/SavingsGoalHistory";
 
 const addSavingsGoal = async (
   req: RequestWithDecodedIdToken,
@@ -14,30 +15,34 @@ const addSavingsGoal = async (
     next(new Error("No firebase uid"));
   }
   try {
-    const savingsGoal = await SavingsGoalModel.findOne({
-      firebaseUserUid: firebaseUid,
-    });
-    if (!savingsGoal) {
-      await SavingsGoalModel.create({
+    const savingsGoal = await SavingsGoalModel.findOneAndUpdate(
+      {
+        firebaseUserUid: firebaseUid,
+      },
+      {
         firebaseUserUid: firebaseUid,
         currentAmountContributed: 0,
         descriptionOfGoal,
         nameOfGoal,
         targetAmount,
-      });
-    } else {
-      await SavingsGoalModel.findOneAndUpdate(
-        {
-          firebaseUserUid: firebaseUid,
+      },
+      { upsert: true }
+    );
+
+    await SavingsGoalHistoryModel.findOneAndUpdate(
+      {
+        firebaseUserUid: firebaseUid,
+      },
+      {
+        $push: {
+          savingsGoalHistory: savingsGoal,
         },
-        {
-          currentAmountContributed: 0,
-          descriptionOfGoal,
-          nameOfGoal,
-          targetAmount,
-        }
-      );
-    }
+      },
+      {
+        upsert: true,
+      }
+    );
+
     res.status(200).send("OK");
   } catch (error) {
     console.log("Error creating or updating savings goal.");
