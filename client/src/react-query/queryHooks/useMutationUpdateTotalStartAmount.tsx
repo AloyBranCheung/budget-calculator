@@ -11,6 +11,8 @@ export default function useMutationUpdateTotalStartAmount() {
     },
     onError: () =>
       toastMessage(ToastMessageType.Error, "Error resetting budget"),
+    onSuccess: () =>
+      toastMessage(ToastMessageType.Success, "Budget updated to new budget."),
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: queryKeys.budget.data.queryKey,

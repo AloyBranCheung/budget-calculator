@@ -12,6 +12,8 @@ export default function useMutationContributeAmount() {
       contributeToGoal(data),
     onError: () =>
       toastMessage(ToastMessageType.Error, "Error contributing amount."),
+    onSuccess: () =>
+      toastMessage(ToastMessageType.Success, "Amount contributed!"),
     onSettled: () =>
       queryClient.invalidateQueries({
         queryKey: queryKeys.savingsGoal.getSavingsGoal.queryKey,
