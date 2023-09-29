@@ -13,6 +13,11 @@ export default function useMutationAddSavingsGoal() {
       addSavingsGoal(data),
     onError: () =>
       toastMessage(ToastMessageType.Error, "Error adding/updating goal."),
+    onSuccess: () =>
+      toastMessage(
+        ToastMessageType.Success,
+        "Goal added! If previous one existed, history has been saved."
+      ),
     onSettled: () =>
       queryClient.invalidateQueries({
         queryKey: queryKeys.savingsGoal.getSavingsGoal.queryKey,

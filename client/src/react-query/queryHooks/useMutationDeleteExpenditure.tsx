@@ -10,6 +10,11 @@ export default function useMutationDeleteExpenditure() {
       deleteExpenditure(id, category),
     onError: () =>
       toastMessage(ToastMessageType.Error, "Error deleting expenditure."),
+    onSuccess: () =>
+      toastMessage(
+        ToastMessageType.Success,
+        "Expenditure successfully deleted."
+      ),
     onSettled: () =>
       queryClient.invalidateQueries({
         queryKey: queryKeys.budget.data.queryKey,

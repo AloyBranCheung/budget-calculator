@@ -12,6 +12,11 @@ export default function useMutationUpdateBudgetCategories() {
       updateBudgetCategories(budgetObj),
     onError: () =>
       toastMessage(ToastMessageType.Error, "Error resetting budget"),
+    onSuccess: () =>
+      toastMessage(
+        ToastMessageType.Success,
+        "Successfully added item to category."
+      ),
     onSettled: () =>
       queryClient.invalidateQueries({
         queryKey: queryKeys.budget.data.queryKey,
