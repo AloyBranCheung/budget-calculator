@@ -1,5 +1,6 @@
 import React from "react";
 import PageTitle from "../UI/typography/PageTitle";
+import CopyIcon from "../UI/CopyIcon";
 import { ToastContainer } from "react-toastify";
 // react-hook-form
 import { useForm } from "react-hook-form";
@@ -35,7 +36,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="border-2 border-solid border-black p-5 flex items-center justify-center flex-col gap-3">
-        <PageTitle title="SimpleyBudgets" />
+        <PageTitle title="SimplyBudgets" />
         <div>Login </div>
         <form
           onSubmit={handleSubmit(submitData)}
@@ -67,6 +68,17 @@ export default function Login() {
             <Button type="submit" label="Login" />
           )}
         </form>
+        <div className="flex flex-col gap-2 items-center justify-center">
+          <p>Don't have an account? No worries use the demo account.</p>
+          <div className="border-2 border-solid border-black rounded-xl p-1">
+            <CopyIcon label="user: demo@demo.com" value="demo@demo.com" />
+            <CopyIcon
+              label="pass: WJUxV1dzdTjnG8p4tKqU"
+              value="WJUxV1dzdTjnG8p4tKqU"
+            />
+          </div>
+          <p>Want a personal one? Message me on Github.</p>
+        </div>
       </div>
       <ToastContainer
         position="top-right"
