@@ -1,5 +1,12 @@
 # budget-calculator
 
+Demo Account: 
+<br />
+user: `demo@demo.com`
+<br />
+pass: `WJUxV1dzdTjnG8p4tKqU`
+<br />
+
 To install:
 
 - start Docker Enginer/Docker Desktop
