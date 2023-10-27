@@ -27,6 +27,7 @@ export const getBudgetData = async (
       } else {
         const newDocument = await new BudgetDataModel({
           firebaseUserUid: req.decodedIdToken.uid,
+          email: req?.decodedIdToken?.email,
         }).save();
         res.send(newDocument);
       }
@@ -59,6 +60,7 @@ export const updateBudgetData = async (
     });
 
     const updateNewStartingAmount = {
+      email: decodedToken?.email,
       current: {
         ...calculateCurrSpendables(totalStartingAmount),
       },
@@ -74,7 +76,10 @@ export const updateBudgetData = async (
         {
           firebaseUserUid: decodedToken.uid,
         },
-        updateNewStartingAmount
+        updateNewStartingAmount,
+        {
+          upsert: true,
+        }
       );
       next();
       return;
@@ -88,31 +93,28 @@ export const updateBudgetData = async (
       },
     };
 
-    if (currBudgetHistory == null) {
-      await BudgetHistoryModel.create({
+    await BudgetHistoryModel.findOneAndUpdate(
+      {
         firebaseUserUid: decodedToken.uid,
-        history: [historyObj],
-      });
-    } else {
-      await BudgetHistoryModel.findOneAndUpdate(
-        {
-          firebaseUserUid: decodedToken.uid,
+      },
+      {
+        $push: {
+          history: historyObj,
         },
-        {
-          $push: {
-            history: historyObj,
-          },
-        },
-        {
-          new: true,
-        }
-      );
-    }
+      },
+      {
+        new: true,
+        upsert: true,
+      }
+    );
 
     // update new paycheck starting amount
     await BudgetDataModel.findOneAndUpdate(
       { firebaseUserUid: decodedToken.uid },
-      updateNewStartingAmount
+      updateNewStartingAmount,
+      {
+        upsert: true,
+      }
     );
     next();
   } catch (error) {

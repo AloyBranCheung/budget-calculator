@@ -56,6 +56,7 @@ const CategoriesSchema = new mongoose.Schema(
 const BudgetDataSchema = new mongoose.Schema<BudgetDataAPIResponse>(
   {
     firebaseUserUid: { type: String, unique: true },
+    email: { type: String, unique: true },
     current: CurrentTotalsSchema,
     categories: CategoriesSchema,
   },

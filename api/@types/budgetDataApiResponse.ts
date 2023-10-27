@@ -45,6 +45,7 @@ export interface CurrentBudgets {
 
 export interface BudgetDataAPIResponse {
   firebaseUserUid: string;
+  email: string;
   current: CurrentBudgets;
   categories: {
     [BudgetCategory.Needs]: CategoryItems[];
