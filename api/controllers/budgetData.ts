@@ -47,17 +47,13 @@ export const updateBudgetData = async (
   const { totalStartingAmount } = req.body;
   const decodedToken = req.decodedIdToken;
   try {
-    if (decodedToken == null || !decodedToken?.uid) {
+    if (
+      decodedToken == null ||
+      !decodedToken?.uid ||
+      decodedToken?.uid === null
+    ) {
       return res.status(500).send("Could not find user.");
     }
-
-    // save current paycheck historyr e.g. categories, budget remaining etc.
-    const currBudgetHistory = await BudgetHistoryModel.findOne({
-      firebaseUserUid: decodedToken.uid,
-    });
-    const currBudget = await BudgetDataModel.findOne({
-      firebaseUserUid: decodedToken.uid,
-    });
 
     const updateNewStartingAmount = {
       email: decodedToken?.email,
@@ -71,25 +67,23 @@ export const updateBudgetData = async (
       },
     };
 
-    if (currBudget == null || !currBudget?.current || !currBudget?.categories) {
-      await BudgetDataModel.findOneAndUpdate(
-        {
-          firebaseUserUid: decodedToken.uid,
-        },
-        updateNewStartingAmount,
-        {
-          upsert: true,
-        }
-      );
-      next();
-      return;
-    }
+    // update budget data
+    const prevBudget = await BudgetDataModel.findOneAndUpdate(
+      {
+        firebaseUserUid: decodedToken.uid,
+      },
+      updateNewStartingAmount,
+      {
+        upsert: true,
+      }
+    );
 
+    // update budget history
     const historyObj = {
-      dateCreated: currBudget?.current.createdAt,
+      dateCreated: prevBudget?.current.createdAt,
       content: {
-        current: currBudget?.current,
-        categories: currBudget?.categories,
+        current: prevBudget?.current,
+        categories: prevBudget?.categories,
       },
     };
 
@@ -108,14 +102,6 @@ export const updateBudgetData = async (
       }
     );
 
-    // update new paycheck starting amount
-    await BudgetDataModel.findOneAndUpdate(
-      { firebaseUserUid: decodedToken.uid },
-      updateNewStartingAmount,
-      {
-        upsert: true,
-      }
-    );
     next();
   } catch (error) {
     next(error);
